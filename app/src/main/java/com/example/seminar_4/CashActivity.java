@@ -1,13 +1,23 @@
 package com.example.seminar_4;
 import com.example.seminar_4.ListFragment;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -16,6 +26,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class CashActivity extends AppCompatActivity {
     protected static final String TRANSACTIONS = "transactions";
@@ -29,6 +40,10 @@ public class CashActivity extends AppCompatActivity {
     private ArrayList<Cash> transactions = new ArrayList<>();
     private Intent intent;
     private Bundle bundle;
+    private LineChart lineChart;
+    private LineData lineData;
+    private ArrayList<Entry> entryList = new ArrayList<>();
+    private Button btnChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,15 +56,19 @@ public class CashActivity extends AppCompatActivity {
         lvTransactions = findViewById(R.id.lvFragment);
         intent = getIntent();
         bundle = intent.getExtras();
+        btnChart = findViewById(R.id.btnChart);
 
         transactions = bundle.getParcelableArrayList("totalTransactions");
 
-        Cash cash = (Cash)bundle.getParcelable("value");
+        final Cash cash = (Cash)bundle.getParcelable("value");
         info.setText(cash.toString());
         transactions.add(cash);
+        final CashDBHelper databaseHelper = new CashDBHelper(this);
+
         btnYES.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                databaseHelper.insertCash(cash);
                 fragment = ListFragment.newInstance(transactions);
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -62,6 +81,17 @@ public class CashActivity extends AppCompatActivity {
             public void onClick(View view) {
                 setResult(0, intent);
                 finish();
+            }
+        });
+        btnChart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditFragment fragment;
+                fragment = EditFragment.newInstance(cash, transactions);
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment, fragment);
+                fragmentTransaction.commit();
             }
         });
         btnDone.setOnClickListener(new View.OnClickListener() {

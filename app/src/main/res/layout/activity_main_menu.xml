@@ -72,10 +72,17 @@
         android:layout_height="332dp"
         android:orientation="horizontal">
 
+        <ListView
+            android:id="@+id/lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
         <GridView
             android:id="@+id/dgv"
             android:layout_width="match_parent"
-            android:layout_height="300dp" />
+            android:layout_height="300dp" >
+
+        </GridView>
     </LinearLayout>
 
     <LinearLayout

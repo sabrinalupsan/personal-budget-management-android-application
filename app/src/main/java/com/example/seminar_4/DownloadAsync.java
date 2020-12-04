@@ -1,6 +1,7 @@
 package com.example.seminar_4;
 
 import android.os.AsyncTask;
+import android.util.JsonWriter;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -9,6 +10,9 @@ import org.json.JSONTokener;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -44,23 +48,34 @@ public class DownloadAsync extends AsyncTask<String, Void, String> {
         OutputStream out = null;
 
         try {
+
             URL url = new URL(urlString);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("POST");
-            out = new BufferedOutputStream(urlConnection.getOutputStream());
+            urlConnection.setDoOutput(true);
+            urlConnection.setRequestProperty("Connection", "Keep-Alive");
+            urlConnection.setRequestProperty(
+                    "\\r\\nContent-Type:", " multipart/form-data; boundary=*****\\r\\n");
 
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
-            writer.write(String.valueOf(object));
-            writer.flush();
-            writer.close();
-            out.close();
+            DataOutputStream request = new DataOutputStream(
+                    urlConnection.getOutputStream());
+            request.writeBytes("\\r\\n--*****--\\r\\n");
+
+            request.writeBytes("\\r\\nContent-Disposition: form-data; name=\"" +
+                    "myfile" + "\"; filename=\"" +
+                    "LUPSAN_SABRINA_FILE.json" + "\"");
+            request.writeBytes("\\r\\n");
+            request.writeBytes(data);
+            request.writeBytes("\\r\\n--*****--\\r\\n");
+            request.flush();
+            request.close();
             Log.d(TAG, urlString);
 
             urlConnection.connect();
-            InputStream is = urlConnection.getInputStream();
 
             int responseCode = urlConnection.getResponseCode();
-            Log.d(TAG, String.valueOf(responseCode));
+            Log.d(TAG, "RESPONSE CODE: "+String.valueOf(responseCode));
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

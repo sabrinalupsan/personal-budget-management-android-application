@@ -19,7 +19,7 @@
     <TextView
         android:id="@+id/infoID"
         android:layout_width="match_parent"
-        android:layout_height="116dp"
+        android:layout_height="104dp"
         android:ems="10"
         android:inputType="textMultiLine"
         android:lines="6"
@@ -51,7 +51,13 @@
         android:id="@+id/fragment"
         android:name="com.example.seminar_4.ListFragment"
         android:layout_width="match_parent"
-        android:layout_height="347dp" />
+        android:layout_height="368dp" />
+
+    <Button
+        android:id="@+id/btnChart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Show chart" />
 
     <Button
         android:id="@+id/btnOK"

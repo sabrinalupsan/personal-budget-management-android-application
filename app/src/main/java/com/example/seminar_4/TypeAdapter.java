@@ -68,7 +68,7 @@ public class TypeAdapter extends BaseAdapter {
             holder.date = (TextView)view.findViewById(R.id.tvDate);
             holder.cashAmount = (TextView)view.findViewById(R.id.tvCashAmount);
             holder.rating = (TextView)view.findViewById(R.id.tvRating);
-            holder.imageView = (ImageView)view.findViewById(R.id.imageView);
+            //holder.imageView = (ImageView)view.findViewById(R.id.imageView);
             view.setTag(holder);
 
         }
@@ -89,7 +89,7 @@ public class TypeAdapter extends BaseAdapter {
         float rating1 = cashList.get(i).getRating();
         String rating2 = String.valueOf("The rating: "+rating1);
         holder.rating.setText(rating2);
-        DownloadImage imageTask = new DownloadImage(cashList.get(i).getURL());
+        /*DownloadImage imageTask = new DownloadImage(cashList.get(i).getURL());
         Thread downloadThread = new Thread(imageTask);
         downloadThread.start();
 
@@ -103,7 +103,7 @@ public class TypeAdapter extends BaseAdapter {
                 Log.d(TAG, String.valueOf(image.getHeight()));
                 holder.imageView.setImageBitmap(image);
             }
-        };
+        };*/
         return view;
     }
 }

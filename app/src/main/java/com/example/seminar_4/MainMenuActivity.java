@@ -5,19 +5,24 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -35,7 +40,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import static android.content.ContentValues.TAG;
-import static com.example.seminar_4.R.id.imageView;
+//import static com.example.seminar_4.R.id.imageView;
 
 public class MainMenuActivity extends AppCompatActivity {
 
@@ -46,7 +51,8 @@ public class MainMenuActivity extends AppCompatActivity {
     private GridView gridView;
     private ArrayList<Cash> transactions = new ArrayList<Cash>();
     private CheckBox box;
-    private ImageView img;
+    ListView listView;
+    //private ImageView img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +65,33 @@ public class MainMenuActivity extends AppCompatActivity {
         String s = makeJSONFile();
 
         DownloadAsync downloadAsync = new DownloadAsync();
-        downloadAsync.execute("https://ptsv2.com/t/9yoh3-1606426559/post", s);
+        downloadAsync.execute("https://ptsv2.com/t/j5cq1-1606468043/post", s);
 
-        TypeAdapter adapter = new TypeAdapter(getApplicationContext(), transactions);
-        gridView.setAdapter(adapter);
+        //TypeAdapter adapter = new TypeAdapter(getApplicationContext(), transactions);
+        //gridView.setAdapter(adapter);
+
+        final CashDBHelper databaseHelper = new CashDBHelper(this);
+        //databaseHelper.insertSample();
+
+        final Cursor cursor = databaseHelper.getDataCursor();
+        final SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this,
+                android.R.layout.simple_list_item_1,
+                cursor,
+                new String[]{"_id", "type"},
+                new int[]{android.R.id.text1, android.R.id.text2});
+        listView.setAdapter(cursorAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView txtValue = view.findViewById(android.R.id.text1);
+                String value = txtValue.getText().toString();
+                Toast.makeText(getApplicationContext(), "Clicked on item: " + value, Toast.LENGTH_SHORT).show();
+                databaseHelper.deleteItemById(value);
+                cursorAdapter.swapCursor(databaseHelper.getDataCursor());
+                cursorAdapter.notifyDataSetChanged();
+            }
+        });
 
         btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +139,8 @@ public class MainMenuActivity extends AppCompatActivity {
         btnOK = findViewById(R.id.button);
         gridView = findViewById(R.id.dgv);
         btnDelete = findViewById(R.id.button2);
-        img = findViewById(R.id.imageView);
+        listView = findViewById(R.id.lv);
+        //img = findViewById(R.id.imageView);
     }
 
     /*public void downloadImage(String s) {
@@ -124,9 +154,49 @@ public class MainMenuActivity extends AppCompatActivity {
         downloadThread.start();
     }*/
 
+    public File makeFILE()
+    {
+        File file = new File(getApplicationContext().getFilesDir(), "LUPSAN_SABRINA_FILE");
+        JSONObject obj = new JSONObject();
+        try {
+            FileWriter fileWriter =new FileWriter(file);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+            JSONObject jsonObject = new JSONObject();
+            JSONObject joCollectionOfTransactions = new JSONObject();
+            JSONArray jaTransactions = new JSONArray();
+
+            for (int i = 0; i < transactions.size(); i++) {
+                Cash c = transactions.get(i);
+                JSONObject joBook = new JSONObject();
+                joBook.put("type", c.getType());
+                joBook.put("amount", c.getCashAmount());
+                joBook.put("rating", c.getRating());
+                joBook.put("date", c.getDate());
+                jaTransactions.put(joBook);
+                String userString = joBook.toString();
+                bufferedWriter.write(userString);
+                Log.d(TAG, "Content: "+userString);
+            }
+            Log.d(TAG, "Content: "+jaTransactions);
+            for(int i=0; i<jaTransactions.length(); i++)
+            {
+                joCollectionOfTransactions.put("transaction"+(i+1), jaTransactions.getJSONObject(i));
+            }
+            jsonObject.put("LUPSAN_SABRINA", joCollectionOfTransactions);
+            obj = jsonObject;
+            Log.d(TAG, "Content: "+jsonObject);
+            //joCollectionOfTransactions.put(jaTransactions)
+            bufferedWriter.close();
+        } catch (JSONException | IOException e) {
+            e.printStackTrace();
+        }
+        return file;
+    }
+
     public String makeJSONFile()
     {
-        File file = new File(getApplicationContext().getFilesDir(), "my_json");
+        File file = new File(getApplicationContext().getFilesDir(), "LUPSAN_SABRINA_FILE");
         JSONObject obj = new JSONObject();
         try {
         FileWriter fileWriter =new FileWriter(file);
@@ -153,7 +223,7 @@ public class MainMenuActivity extends AppCompatActivity {
             {
                 joCollectionOfTransactions.put("transaction"+(i+1), jaTransactions.getJSONObject(i));
             }
-            jsonObject.put("Sabrina", joCollectionOfTransactions);
+            jsonObject.put("LUPSAN_SABRINA", joCollectionOfTransactions);
             obj = jsonObject;
             Log.d(TAG, "Content: "+jsonObject);
             //joCollectionOfTransactions.put(jaTransactions)

@@ -51,7 +51,7 @@
         android:id="@+id/fragment"
         android:name="com.example.seminar_4.ListFragment"
         android:layout_width="match_parent"
-        android:layout_height="368dp" />
+        android:layout_height="313dp" />
 
     <Button
         android:id="@+id/btnChart"

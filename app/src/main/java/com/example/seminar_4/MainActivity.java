@@ -70,7 +70,12 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
-
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                date.setText("");
+            }
+        });
         amount.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -100,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
         fromSavings = findViewById(R.id.switch1);
         date = findViewById(R.id.editTextDate2);
         planned = findViewById(R.id.checkBox);
+        tvSeekBar = findViewById(R.id.textView4);
     }
 
     protected void clearAllComponents()
@@ -110,10 +116,10 @@ public class MainActivity extends AppCompatActivity {
         rating.setRating(0);
         amount.setProgress(0);
         type.clearCheck();
+        tvSeekBar.setText("Selected amount: ");
     }
 
-    protected Cash getInfoFromControls()
-    {
+    protected Cash getInfoFromControls()  {
         String theType=null;
         try{
             RadioButton btn = (RadioButton)findViewById(type.getCheckedRadioButtonId());
@@ -127,11 +133,22 @@ public class MainActivity extends AppCompatActivity {
 
         Date theDate = null;
         try {
-            theDate = new SimpleDateFormat("dd/MM/yyyy").parse(date.getText().toString());
+            theDate = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy").parse(date.getText().toString());
         }
         catch (ParseException e) {
             e.printStackTrace();
         }
+        try {
+            if(theDate == null)
+            {
+                Date newDate = new Date();
+                theDate = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy").parse(newDate.toString());
+            }
+        }
+        catch (ParseException e) {
+            e.printStackTrace();
+        }
+
 
         float theRating = rating.getRating();
 

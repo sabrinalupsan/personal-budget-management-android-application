@@ -7,9 +7,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import androidx.annotation.Nullable;
-
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class CashDBHelper extends SQLiteOpenHelper {
 
@@ -40,6 +45,35 @@ public class CashDBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    public ArrayList<Cash> selectAll() throws ParseException {
+        ArrayList<Cash> transactions = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT _id, type, amount, time, rating, planned, savings FROM cash ", null);
+        if (c.moveToFirst()){
+            do {
+                // Passing values
+                String id = c.getString(0);
+                String type = c.getString(1);
+                String amount = c.getString(2);
+                float amountOfCash = Float.parseFloat(amount);
+                String time = c.getString(3);
+                //theDate = .parse(date.getText().toString());
+                SimpleDateFormat sdf=new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy");
+                Date currentdate = sdf.parse(time);
+                String rating = c.getString(4);
+                float ratingFloat = Float.parseFloat(rating);
+                String planned = c.getString(5);
+                String savings = c.getString(6);
+                Cash cash = new Cash(type, amountOfCash, currentdate, ratingFloat, planned, savings);
+                transactions.add(cash);
+                // Do something Here with values
+            } while(c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return transactions;
+    }
+
     public void insertSample() {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -64,6 +98,7 @@ public class CashDBHelper extends SQLiteOpenHelper {
         cv.put(CashTable.COLUMN_TYPE, c.getType());
         cv.put(CashTable.COLUMN_TIME, c.getDate().toString());
         cv.put(CashTable.COLUMN_AMOUNT, c.getCashAmount());
+        cv.put(CashTable.COLUMN_RATING, c.getRating());
         cv.put(CashTable.COLUMN_PLANNED, c.isPlanned());
         cv.put(CashTable.COLUMN_SAVINGS, c.isFromSavings());
         Long value = db.insert(CashTable.TABLE_TODO, null, cv);

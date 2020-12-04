@@ -10,6 +10,7 @@ public class CashTable {
     public static final String COLUMN_TYPE = "type";
     public static final String COLUMN_TIME = "time";
     public static final String COLUMN_AMOUNT = "amount";
+    public static final String COLUMN_RATING = "rating";
     public static final String COLUMN_PLANNED = "planned";
     public static final String COLUMN_SAVINGS = "savings";
 
@@ -22,6 +23,7 @@ public class CashTable {
             + COLUMN_TYPE + " text not null, "
             + COLUMN_TIME + " text, "
             + COLUMN_AMOUNT + " integer not null, "
+            + COLUMN_RATING + " integer not null, "
             + COLUMN_PLANNED + " text not null,"
             + COLUMN_SAVINGS + " text not null"
             + ");";

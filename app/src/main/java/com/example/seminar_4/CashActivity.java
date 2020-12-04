@@ -25,6 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -49,14 +50,8 @@ public class CashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cash);
-        info = findViewById(R.id.infoID);
-        btnYES = findViewById(R.id.btnSave);
-        btnNO = findViewById(R.id.btnCancel);
-        btnDone = findViewById(R.id.btnOK);
-        lvTransactions = findViewById(R.id.lvFragment);
-        intent = getIntent();
-        bundle = intent.getExtras();
-        btnChart = findViewById(R.id.btnChart);
+
+        initializeComponents();
 
         transactions = bundle.getParcelableArrayList("totalTransactions");
 
@@ -69,6 +64,12 @@ public class CashActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 databaseHelper.insertCash(cash);
+                try {
+                    transactions = databaseHelper.selectAll();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                //here i need to read everything from the database
                 fragment = ListFragment.newInstance(transactions);
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -103,6 +104,17 @@ public class CashActivity extends AppCompatActivity {
                 finish();
             }
         });    }
+
+    private void initializeComponents() {
+        info = findViewById(R.id.infoID);
+        btnYES = findViewById(R.id.btnSave);
+        btnNO = findViewById(R.id.btnCancel);
+        btnDone = findViewById(R.id.btnOK);
+        lvTransactions = findViewById(R.id.lvFragment);
+        intent = getIntent();
+        bundle = intent.getExtras();
+        btnChart = findViewById(R.id.btnChart);
+    }
 
     @Override
     public void onBackPressed() {

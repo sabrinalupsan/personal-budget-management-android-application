@@ -75,7 +75,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
         final Cursor cursor = databaseHelper.getDataCursor();
         final SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this,
-                android.R.layout.simple_list_item_1,
+                android.R.layout.simple_list_item_2,
                 cursor,
                 new String[]{"_id", "type"},
                 new int[]{android.R.id.text1, android.R.id.text2});

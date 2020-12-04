@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import static com.example.seminar_4.CashActivity.TRANSACTIONS;
 
 public class EditFragment extends Fragment {
-    protected static final String TRANSACTIONSFORCHART = "transactionsForChart";
+    protected static final String TRANSACTIONSFORCHART = "transactions";
     private ArrayList<Cash> listOFTransactions = new ArrayList<Cash>();
     private EditText text;
     private Button btnBack;
@@ -54,10 +54,9 @@ public class EditFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_edit, container, false);
         initComponents(view);
         if (getArguments() != null) {
+            lineChart = view.findViewById(R.id.lineChart);
             this.listOFTransactions = getArguments().getParcelableArrayList(TRANSACTIONS);
             if(listOFTransactions!=null) {
-                lineChart = view.findViewById(R.id.lineChart);
-
                 for (int i = 0; i < listOFTransactions.size(); i++) {
                     float x = listOFTransactions.get(i).getCashAmount();
                     float y = listOFTransactions.get(i).getRating();
@@ -68,12 +67,10 @@ public class EditFragment extends Fragment {
                 lineDataSet.setFillAlpha(110);
                 lineData = new LineData(lineDataSet);
                 lineChart.setData(lineData);
-                lineChart.setVisibleXRangeMaximum(10);
                 lineChart.invalidate();
             }
             else
             {
-                lineChart = view.findViewById(R.id.lineChart);
                 Cash cash = (Cash) getArguments().getSerializable("cash");
                 float x = cash.getCashAmount();
                 float y = cash.getRating();

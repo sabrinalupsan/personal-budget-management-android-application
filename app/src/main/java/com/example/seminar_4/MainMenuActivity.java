@@ -2,9 +2,11 @@ package com.example.seminar_4;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -48,10 +50,12 @@ public class MainMenuActivity extends AppCompatActivity {
     private Spinner spnMenu;
     private Button btnOK;
     private Button btnDelete;
+    private Button btnSettings;
     private GridView gridView;
     private ArrayList<Cash> transactions = new ArrayList<Cash>();
     private CheckBox box;
-    ListView listView;
+    private ListView listView;
+    private TextView tvStart;
     //private ImageView img;
 
     @Override
@@ -60,6 +64,10 @@ public class MainMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
 
         initializeComponents();
+
+        SharedPreferences preferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        tvStart.setText("Welcome to CashApp, "+preferences.getString("signature", ""));
 
         makeTransactions();
         String s = makeJSONFile();
@@ -103,12 +111,22 @@ public class MainMenuActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivityForResult(intent, REQUEST_CODE);
                 }
+                else
+                    if(spnChoice.compareTo("Wishlist")==0)
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
             }
         });
-        btnDelete.setOnClickListener(new View.OnClickListener() {
+        btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -141,6 +159,8 @@ public class MainMenuActivity extends AppCompatActivity {
         btnDelete = findViewById(R.id.button2);
         listView = findViewById(R.id.lv);
         //img = findViewById(R.id.imageView);
+        btnSettings = findViewById(R.id.btnSettings);
+        tvStart = findViewById(R.id.edtStart);
     }
 
     /*public void downloadImage(String s) {

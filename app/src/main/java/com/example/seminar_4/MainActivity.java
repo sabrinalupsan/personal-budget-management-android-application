@@ -2,10 +2,13 @@ package com.example.seminar_4;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +19,7 @@ import android.widget.RatingBar;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.text.ParseException;
@@ -23,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static android.content.ContentValues.TAG;
 import static com.example.seminar_4.CashActivity.TRANSACTIONS;
 
 
@@ -52,15 +57,28 @@ public class MainActivity extends AppCompatActivity {
         InitializeAllComponents();
         OKbutton.setOnClickListener(new View.OnClickListener() {
 
-            @SuppressLint("SimpleDateFormat")
+            @SuppressLint({"SimpleDateFormat", "WrongConstant"})
             @Override
             public void onClick(View view) {
                Intent intent = new Intent(getApplicationContext(), CashActivity.class);
-               Cash cash = getInfoFromControls();
-               bundle.putParcelable("value", cash);
-               bundle.putParcelableArrayList("totalTransactions", transactions);
-               intent.putExtras(bundle);
-               startActivityForResult(intent, REQUEST_CODE);
+                String theType = null;
+                try {
+                    RadioButton btn = (RadioButton) findViewById(type.getCheckedRadioButtonId());
+                    theType = btn.getText().toString();
+                } catch (NullPointerException ex) {
+                    //messagebox?
+                }
+                Log.d(TAG, "theType is "+theType);
+
+                if (theType == null)
+                    Toast.makeText(getApplicationContext(), "Please choose a type of transaction!", 5000).show();
+                else {
+                    Cash cash = getInfoFromControls();
+                    bundle.putParcelable("value", cash);
+                    bundle.putParcelableArrayList("totalTransactions", transactions);
+                    intent.putExtras(bundle);
+                    startActivityForResult(intent, REQUEST_CODE);
+                }
             }
         });
         Cancelbutton.setOnClickListener(new View.OnClickListener() {
@@ -119,56 +137,70 @@ public class MainActivity extends AppCompatActivity {
         tvSeekBar.setText("Selected amount: ");
     }
 
-    protected Cash getInfoFromControls()  {
-        String theType=null;
-        try{
-            RadioButton btn = (RadioButton)findViewById(type.getCheckedRadioButtonId());
+    @SuppressLint("WrongConstant")
+    protected Cash getInfoFromControls() {
+        String theType = null;
+        try {
+            RadioButton btn = (RadioButton) findViewById(type.getCheckedRadioButtonId());
             theType = btn.getText().toString();
-        }
-        catch(NullPointerException ex) {
+        } catch (NullPointerException ex) {
             //messagebox?
         }
+        if (theType == null)
+            Toast.makeText(this, "Please choose a type of transaction!", 5000);
+            float theAmount = amount.getProgress();
 
-        float theAmount = amount.getProgress();
-
-        Date theDate = null;
-        try {
-            theDate = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy").parse(date.getText().toString());
-        }
-        catch (ParseException e) {
-            e.printStackTrace();
-        }
-        try {
-            if(theDate == null)
+            if (theAmount == 0.0 && (theType.compareTo("Income") == 0 || theType.compareTo("Expense") == 0)) //here check if the type if income/expense
             {
-                Date newDate = new Date();
-                theDate = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy").parse(newDate.toString());
+                SharedPreferences preferences = PreferenceManager
+                        .getDefaultSharedPreferences(this);
+                if (theType.compareTo("Income") == 0) {
+                    String x = preferences.getString("incomeAmount", "");
+                    amount.setProgress(Integer.parseInt(x));
+                } else {
+                    String x = preferences.getString("expenseAmount", "");
+                    amount.setProgress(Integer.parseInt(x));
+                }
+                theAmount = amount.getProgress();
             }
-        }
-        catch (ParseException e) {
-            e.printStackTrace();
-        }
+
+            Date theDate = null;
+            try {
+                theDate = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy").parse(date.getText().toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            try {
+                if (theDate == null) {
+                    Date newDate = new Date();
+                    theDate = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy").parse(newDate.toString());
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
 
-        float theRating = rating.getRating();
+            float theRating = rating.getRating();
 
-        boolean isPlanned;
-        isPlanned = planned.isChecked();
-        String plannedValue;
-        if(isPlanned==true)
-            plannedValue = "Yes";
-        else
-            plannedValue = "No";
+            boolean isPlanned;
+            isPlanned = planned.isChecked();
+            String plannedValue;
+            if (isPlanned == true)
+                plannedValue = "Yes";
+            else
+                plannedValue = "No";
 
 
-        boolean isFromSavings;
-        isFromSavings = fromSavings.isChecked();
-        String fromSavings = null;
-        if(isFromSavings==true)
-            fromSavings = "Yes";
-        else
-            fromSavings = "No";
-        return new Cash(theType, theAmount, theDate, theRating, plannedValue, fromSavings);
+            boolean isFromSavings;
+            isFromSavings = fromSavings.isChecked();
+            String fromSavings = null;
+            if (isFromSavings == true)
+                fromSavings = "Yes";
+            else
+                fromSavings = "No";
+            return new Cash(theType, theAmount, theDate, theRating, plannedValue, fromSavings);
+
+
     }
 
     @Override

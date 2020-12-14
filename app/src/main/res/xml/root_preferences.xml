@@ -1,0 +1,35 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory android:title="App aspect">
+
+        <SwitchPreferenceCompat
+            android:id="@+id/darktheme"
+            app:key="sync"
+            app:title="Dark theme"
+            android:defaultValue="false"/>
+    </PreferenceCategory>
+    <PreferenceCategory app:title="@string/messages_header">
+
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/income_values"
+            android:entryValues="@array/income_values"
+            android:key="incomeAmount"
+            android:title="Default income" />
+        <EditTextPreference
+            android:defaultValue="0"
+            android:key="expenseAmount"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Default expense amount" />
+        <EditTextPreference
+            app:key="signature"
+            app:title="@string/signature_title"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/sync_header"/>
+
+</PreferenceScreen>

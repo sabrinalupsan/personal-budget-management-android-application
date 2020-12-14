@@ -12,8 +12,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/editTextTextPersonName"
+        <TextView
+            android:id="@+id/edtStart"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -35,7 +35,7 @@
         android:layout_height="61dp"
         android:orientation="horizontal">
 
-        <EditText
+        <TextView
             android:id="@+id/editTextTextPersonName5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -69,18 +69,18 @@
     <LinearLayout
         android:id="@+id/l1"
         android:layout_width="match_parent"
-        android:layout_height="332dp"
+        android:layout_height="305dp"
         android:orientation="horizontal">
 
         <ListView
             android:id="@+id/lv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="293dp" />
 
         <GridView
             android:id="@+id/dgv"
             android:layout_width="match_parent"
-            android:layout_height="300dp" >
+            android:layout_height="300dp">
 
         </GridView>
     </LinearLayout>
@@ -100,7 +100,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="51dp"
         android:orientation="horizontal">
 
         <Button
@@ -109,6 +109,19 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Cancel" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Change settings" />
     </LinearLayout>
 
 </LinearLayout>

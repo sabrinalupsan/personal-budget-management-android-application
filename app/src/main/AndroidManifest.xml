@@ -23,7 +23,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".CashActivity" />
+        <activity android:name=".MainActivityCash"></activity>
+        <activity android:name=".MainActivityWishlist"></activity>
+        <activity android:name=".AddWishActivity"></activity>
         <activity android:name=".MainActivity"></activity>
+        <activity android:name=".calendar_activity"></activity>
+        <activity android:name=".CreditCards_2"></activity>
+        <activity android:name=".RegistrationList"></activity>
+        <activity android:name=".IsCorrect"></activity>
+
     </application>
 
 </manifest>

@@ -1,24 +1,14 @@
 package com.example.seminar_4;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-
 import java.util.ArrayList;
-
-import static android.content.ContentValues.TAG;
 
 public class TypeAdapter extends BaseAdapter {
 
@@ -62,7 +52,7 @@ public class TypeAdapter extends BaseAdapter {
         final CashHolder holder;
         if(view == null)
         {
-            view = layoutInflater.inflate(R.layout.my_layout, viewGroup, false);
+            view = layoutInflater.inflate(R.layout.my_layout_cash, viewGroup, false);
             holder = new CashHolder();
             holder.type = (TextView)view.findViewById(R.id.tvType);
             holder.date = (TextView)view.findViewById(R.id.tvDate);

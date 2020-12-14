@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:background="#3C3A36"
+
+    >
+
+    <TextView
+        android:textColor="#F6FAF9"
+        android:textStyle="italic"
+        android:textSize="30sp"
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_weight="1"
+        android:text="@string/credit_cards"
+
+        android:textAlignment="center"
+
+        />
+
+    <TextView
+        android:id="@+id/tv_limit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:textColor="#F6FAF9"
+        android:text="@string/limit" />
+
+    <androidx.appcompat.widget.AppCompatSeekBar
+        android:id="@+id/sb_limit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:max="150"
+        android:min="0"
+        android:progress="1"
+        android:thumb="@android:drawable/arrow_up_float"
+    />
+
+    <TextView
+        android:id="@+id/tv_seekBarValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:textColor="#F6FAF9"
+        />
+
+    <TextView
+        android:id="@+id/tv_Actual_Amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#F6FAF9"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/actual_amount" />
+
+    <EditText
+        android:textColor="#F6FAF9"
+        android:id="@+id/et_actualAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:hint="@string/insert_the_amount"
+        android:inputType="number"
+        android:textColorHint="#AC8E62"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:textColor="#F6FAF9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/what_type_of_sum" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:id="@+id/rg_typeSum">
+
+
+        <RadioButton
+            android:id="@+id/rb_expense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/expense"
+            android:layout_marginTop="8dp"
+            android:textColor="#E37575"/>
+
+        <RadioButton
+            android:textColor="#64C564"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/income" />
+
+    </RadioGroup>
+
+
+    <TextView
+        android:textColor="#F6FAF9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/category" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:textColor="#F6FAF9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/food" />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:textColor="#F6FAF9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/clothing" />
+
+    <CheckBox
+        android:id="@+id/checkBox3"
+        android:textColor="#F6FAF9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/services" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:weightSum="2"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/tv_DatePlace"
+            android:textColor="#F6FAF9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColorHint="#AC8E62"
+            android:onClick="CallCalendarActivity"
+            android:clickable="true"
+            android:inputType="date"
+            android:hint="@string/date_of_transaction"
+            android:layout_marginStart="8dp"
+            />
+
+        <Button
+            android:background="#062F42"
+            android:id="@+id/btngocalendar"
+            android:textColor="#EDF1F0"
+            android:onClick="CallCalendarActivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:text="@string/go_to_calendar" />
+    </LinearLayout>
+
+
+    <Button
+        android:onClick="callSecondActivity"
+        android:id="@+id/btn_next1"
+        android:layout_width="149dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:text="@string/next"
+        android:layout_gravity="center"
+        />
+
+
+</LinearLayout>
+
+

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp"
+    android:orientation="vertical"
+    tools:context=".MainActivityWishlist">
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/imageFilterView"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        app:srcCompat="@drawable/untitled_1"
+        tools:ignore="VectorDrawableCompat" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="209dp"
+        tools:context=".mainFragment">
+
+        <ListView
+
+            android:id="@+id/wishesLv"
+            android:layout_width="match_parent"
+            android:layout_height="607dp"
+
+            />
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        android:onClick="startAddWish"/>
+
+    <GridView
+        android:id="@+id/gvWishes"
+        android:layout_width="match_parent"
+        android:layout_height="345dp"
+        android:numColumns="2"
+        />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:onClick="btnSave"/>
+
+</LinearLayout>

@@ -1,17 +1,12 @@
 package com.example.seminar_4;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,9 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -35,9 +28,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.lang.reflect.Type;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -108,17 +98,20 @@ public class MainMenuActivity extends AppCompatActivity {
                 spnChoice = spnMenu.getSelectedItem().toString();
                 if(spnChoice.compareTo("Cash")==0)
                 {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), MainActivityCash.class);
                     startActivityForResult(intent, REQUEST_CODE);
                 }
                 else
                     if(spnChoice.compareTo("Wishlist")==0)
                     {
+                        Intent intent = new Intent(getApplicationContext(), MainActivityWishlist.class);
+                        startActivityForResult(intent, REQUEST_CODE);
 
                     }
                     else
                     {
-
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivityForResult(intent, REQUEST_CODE);
                     }
             }
         });

@@ -1,4 +1,4 @@
-package com.example.seminar_4;
+package com.example.seminar_4.CreditCards;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,16 +6,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.DatePicker;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.seminar_4.CreditCards.MainActivity;
+import com.example.seminar_4.R;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class calendar_activity extends AppCompatActivity {
 

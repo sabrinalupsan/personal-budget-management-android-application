@@ -1,4 +1,4 @@
-package com.example.seminar_4;
+package com.example.seminar_4.Cash;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,14 +7,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.text.DateFormat;
+import com.example.seminar_4.Cash.Cash;
+import com.example.seminar_4.Cash.CashTable;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 public class CashDBHelper extends SQLiteOpenHelper {
 

@@ -1,6 +1,5 @@
-package com.example.seminar_4;
+package com.example.seminar_4.Cash;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -14,7 +13,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import com.example.seminar_4.EditFragment;
+import com.example.seminar_4.R;
 
 import java.util.ArrayList;
 

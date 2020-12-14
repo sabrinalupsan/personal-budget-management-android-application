@@ -1,4 +1,4 @@
-package com.example.seminar_4;
+package com.example.seminar_4.Cash;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;

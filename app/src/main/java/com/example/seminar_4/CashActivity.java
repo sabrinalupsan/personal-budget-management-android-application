@@ -1,23 +1,17 @@
 package com.example.seminar_4;
-import com.example.seminar_4.ListFragment;
+import com.example.seminar_4.Cash.Cash;
+import com.example.seminar_4.Cash.CashDBHelper;
+import com.example.seminar_4.Cash.ListFragment;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -27,7 +21,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class CashActivity extends AppCompatActivity {
     protected static final String TRANSACTIONS = "transactions";

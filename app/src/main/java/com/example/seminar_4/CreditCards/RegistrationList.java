@@ -1,4 +1,4 @@
-package com.example.seminar_4;
+package com.example.seminar_4.CreditCards;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,11 +14,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.GridView;
 import com.example.s4.BudgetApp.CreditEntry;
+import com.example.seminar_4.Cash.DownloadContent;
+import com.example.seminar_4.EditDatabase;
+import com.example.seminar_4.R;
+import com.example.seminar_4.RepoDatabase;
+import com.example.seminar_4.User;
+import com.example.seminar_4.UserDataSource;
 
 
 import org.json.JSONArray;
@@ -26,8 +31,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 public class RegistrationList extends AppCompatActivity {
     private static final String TAG = RegistrationList.class.getSimpleName();

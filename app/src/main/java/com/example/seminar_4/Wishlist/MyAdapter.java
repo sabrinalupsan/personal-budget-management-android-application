@@ -1,4 +1,4 @@
-package com.example.seminar_4;
+package com.example.seminar_4.Wishlist;
 
 
 import android.content.Context;
@@ -12,13 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
 import com.example.sem4.model.Wish;
+import com.example.seminar_4.Cash.DownloadContent;
+import com.example.seminar_4.R;
 
 import java.util.Map;
 

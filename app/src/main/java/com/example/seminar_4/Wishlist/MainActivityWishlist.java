@@ -1,4 +1,4 @@
-package com.example.seminar_4;
+package com.example.seminar_4.Wishlist;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.sem4.model.Wish;
+import com.example.seminar_4.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -1,11 +1,9 @@
-package com.example.seminar_4;
+package com.example.seminar_4.Cash;
 
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 
 import java.io.Serializable;
 import java.util.Date;

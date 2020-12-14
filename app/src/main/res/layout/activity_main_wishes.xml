@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:layout_margin="8dp"
     android:orientation="vertical"
-    tools:context=".MainActivityWishlist">
+    tools:context=".Wishlist.MainActivityWishlist">
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/imageFilterView"

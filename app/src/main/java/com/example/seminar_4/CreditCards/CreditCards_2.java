@@ -1,28 +1,19 @@
-package com.example.seminar_4;
+package com.example.seminar_4.CreditCards;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
-import android.icu.text.IDNA;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.RadioGroup;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.s4.BudgetApp.CreditEntry;
+import com.example.seminar_4.CreditCards.RegistrationList;
+import com.example.seminar_4.R;
 
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class CreditCards_2 extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.seminar_4;
+package com.example.seminar_4.Wishlist;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +14,7 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 
 import com.example.sem4.model.Wish;
+import com.example.seminar_4.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

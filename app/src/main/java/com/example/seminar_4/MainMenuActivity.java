@@ -65,11 +65,11 @@ public class MainMenuActivity extends AppCompatActivity {
                 .getDefaultSharedPreferences(this);
         tvStart.setText("Welcome to CashApp, "+preferences.getString("signature", ""));
 
-        makeTransactions();
-        String s = makeJSONFile();
+        //makeTransactions();
+        //String s = makeJSONFile();
 
-        DownloadAsync downloadAsync = new DownloadAsync();
-        downloadAsync.execute("https://ptsv2.com/t/j5cq1-1606468043/post", s);
+        //DownloadAsync downloadAsync = new DownloadAsync();
+        //downloadAsync.execute("https://ptsv2.com/t/j5cq1-1606468043/post", s);
 
         //TypeAdapter adapter = new TypeAdapter(getApplicationContext(), transactions);
         //gridView.setAdapter(adapter);

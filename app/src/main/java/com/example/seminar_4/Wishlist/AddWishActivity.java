@@ -1,5 +1,6 @@
 package com.example.seminar_4.Wishlist;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.sem4.model.Wish;
 import com.example.seminar_4.R;
@@ -31,6 +33,7 @@ public class AddWishActivity extends AppCompatActivity {
     private Button btnAdd;
     private Intent intent;
     private RadioGroup rgCategory;
+    private Button btnSeeMaps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,13 @@ public class AddWishActivity extends AppCompatActivity {
         populateSpnAlerts();
         btnAdd.setOnClickListener(addWishClickEvent());
         intent=getIntent();
+        btnSeeMaps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mapsIntent = new Intent(getApplicationContext(), MapsActivity.class);
+                startActivityForResult(mapsIntent, 2);
+            }
+        });
 
     }
 
@@ -48,38 +58,44 @@ public class AddWishActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Wish wish= buildWishFromWidgets();
-                intent.putExtra("wish",wish);
-                setResult(RESULT_OK,intent);
-                finish();
+                if(wish!=null) {
+                    intent.putExtra("wish", wish);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
             }
         };
     }
 
     private Wish buildWishFromWidgets() {
-        Date date=null;
-        SimpleDateFormat formater= new SimpleDateFormat("dd/mm/yyyy", Locale.US);
         try {
-             date=formater.parse(deadline.getText().toString());
+            Date date = null;
+            SimpleDateFormat formater = new SimpleDateFormat("dd/mm/yyyy", Locale.US);
+            try {
+                date = formater.parse(deadline.getText().toString());
 //            wish.setDeadline(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
-        String name=wishName.getText().toString();
-        float wCost= Float.parseFloat(cost.getText().toString());
-        float imp=importance.getRating();
-        String category;
-        if(rgCategory.getCheckedRadioButtonId()==R.id.rbExperience){
-            category="Experience";
-        }
-        else category="Material Good";
+            String name = wishName.getText().toString();
+            float wCost = Float.parseFloat(cost.getText().toString());
+            float imp = importance.getRating();
+            String category;
+            if (rgCategory.getCheckedRadioButtonId() == R.id.rbExperience) {
+                category = "Experience";
+            } else category = "Material Good";
 
-        String alert=spnAlerts.getSelectedItem().toString();
+            String alert = spnAlerts.getSelectedItem().toString();
 
-        Wish wish= new Wish(name,imp,date,wCost,alert,category);
+            Wish wish = new Wish(name, imp, date, wCost, alert, category);
 
 //        wish.setCost();
-        return wish;
+            return wish;
+        }catch(Exception e){
+            Toast.makeText(getApplicationContext(),"Incorrect info", Toast.LENGTH_LONG).show();
+            return null;
+        }
     }
 
     private void init(){
@@ -90,6 +106,7 @@ public class AddWishActivity extends AppCompatActivity {
         spnAlerts=findViewById(R.id.spnAlerts);
         btnAdd=findViewById(R.id.addBtn);
         rgCategory=findViewById(R.id.rgCategory);
+        btnSeeMaps = findViewById(R.id.addMaps);
     }
 
     private void populateSpnAlerts(){
@@ -98,5 +115,14 @@ public class AddWishActivity extends AppCompatActivity {
         spnAlerts.setAdapter(adapter);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 10) {
+            String res = data.getStringExtra("wishname");
+            wishName.setText(res);
+        }
+
+    }
 }
 

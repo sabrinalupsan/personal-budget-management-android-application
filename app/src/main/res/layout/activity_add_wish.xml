@@ -88,8 +88,16 @@
         />
 
     <Button
+        android:id="@+id/addMaps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/see_suggestions" />
+
+    <Button
         android:id="@+id/addBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/add" />
+
+
 </LinearLayout>

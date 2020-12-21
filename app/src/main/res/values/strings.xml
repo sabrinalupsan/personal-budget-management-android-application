@@ -92,7 +92,7 @@
     <string name="update">Update</string>
     <string name="insert">Insert</string>
     <string name="insert_last">Insert last</string>
-    <string-array name="alerts" >
+    <string-array name="alerts">
         <item>daily</item>
         <item>weekly</item>
         <item>monthly</item>
@@ -100,4 +100,6 @@
         <item>dont remind me</item>
 
     </string-array>
+    <string name="title_activity_maps">Map</string>
+    <string name="see_suggestions">See suggestions</string>
 </resources>

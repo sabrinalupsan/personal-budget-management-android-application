@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
@@ -25,10 +26,20 @@ import com.example.seminar_4.Cash.Cash;
 import com.example.seminar_4.CashActivity;
 import com.example.seminar_4.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import static android.content.ContentValues.TAG;
 import static com.example.seminar_4.CashActivity.TRANSACTIONS;
@@ -51,6 +62,7 @@ public class MainActivityCash extends AppCompatActivity {
     private Bundle bundle = new Bundle();
     private Cash cash;
     private TextView tvSeekBar;
+    private ImageView img;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -66,7 +78,7 @@ public class MainActivityCash extends AppCompatActivity {
                Intent intent = new Intent(getApplicationContext(), CashActivity.class);
                 String theType = null;
                 try {
-                    RadioButton btn = (RadioButton) findViewById(type.getCheckedRadioButtonId());
+                    RadioButton btn = (RadioButton)findViewById(type.getCheckedRadioButtonId());
                     theType = btn.getText().toString();
                 } catch (NullPointerException ex) {
                     //messagebox?
@@ -114,8 +126,10 @@ public class MainActivityCash extends AppCompatActivity {
                 tvSeekBar.setText("Selected amount: "+String.valueOf(seekBar.getProgress()));
             }
         });
+
     }
 
+    @SuppressLint({"ResourceType", "WrongViewCast"})
     protected void InitializeAllComponents()
     {
         OKbutton = findViewById(R.id.OKbtn);
@@ -127,6 +141,8 @@ public class MainActivityCash extends AppCompatActivity {
         date = findViewById(R.id.editTextDate2);
         planned = findViewById(R.id.checkBox);
         tvSeekBar = findViewById(R.id.textView4);
+        img = findViewById(R.id.imageView2);
+        img.animate().alpha(100f).setDuration(10000);
     }
 
     protected void clearAllComponents()
@@ -218,6 +234,8 @@ public class MainActivityCash extends AppCompatActivity {
                 transactions.add(transactions2.get(i));
             }
             clearAllComponents();
+            makeFILE();
+
         }
         else
         {
@@ -233,5 +251,66 @@ public class MainActivityCash extends AppCompatActivity {
                 //}
             }
         }
+    }
+
+    public File makeFILE()
+    {
+        File file = new File(getApplicationContext().getFilesDir(), "CASH_FILE2");
+        JSONObject obj = new JSONObject();
+        try {
+            FileWriter fileWriter =new FileWriter(file);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+            JSONObject jsonObject = new JSONObject();
+            JSONObject joCollectionOfIncomes = new JSONObject();
+            JSONObject joCollectionOfExpenses = new JSONObject();
+            JSONObject joCollectionOfOthers = new JSONObject();
+            JSONArray jaIncome = new JSONArray();
+            JSONArray jaExpense = new JSONArray();
+            JSONArray jaOther = new JSONArray();
+
+            for (int i = 0; i < transactions.size(); i++) {
+                Cash c = transactions.get(i);
+                JSONObject joBook = new JSONObject();
+                joBook.put("type", c.getType());
+                joBook.put("amount", c.getCashAmount());
+                joBook.put("rating", c.getRating());
+                joBook.put("date", c.getDate());
+                if(c.getType().compareTo("Income")==0)
+                    jaIncome.put(joBook);
+                else
+                    if(c.getType().compareTo("Expense")==0)
+                        jaExpense.put(joBook);
+                    else
+                        jaOther.put(joBook);
+                String userString = joBook.toString();
+                Log.d(TAG, "Content: "+userString);
+            }
+            //Log.d(TAG, "Content: "+jaTransactions);
+            for(int i=0; i<jaIncome.length(); i++)
+            {
+                joCollectionOfIncomes.put("Income"+(i+1), jaIncome.getJSONObject(i));
+            }
+            for(int i=0; i<jaExpense.length(); i++)
+            {
+                joCollectionOfExpenses.put("Expense"+(i+1), jaExpense.getJSONObject(i));
+            }
+            for(int i=0; i<jaOther.length(); i++)
+            {
+                joCollectionOfOthers.put("Others"+(i+1), jaOther.getJSONObject(i));
+            }
+            jsonObject.put("My Income", joCollectionOfIncomes);
+            jsonObject.put("My Expenses", joCollectionOfExpenses);
+            jsonObject.put("Others", joCollectionOfOthers);
+            obj = jsonObject;
+            String userString = obj.toString();
+            bufferedWriter.write(userString);
+            Log.d(TAG, "Content: "+jsonObject);
+            //joCollectionOfTransactions.put(jaTransactions)
+            bufferedWriter.close();
+        } catch (JSONException | IOException e) {
+            e.printStackTrace();
+        }
+        return file;
     }
 }

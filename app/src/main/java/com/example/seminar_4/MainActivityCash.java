@@ -255,7 +255,7 @@ public class MainActivityCash extends AppCompatActivity {
 
     public File makeFILE()
     {
-        File file = new File(getApplicationContext().getFilesDir(), "CASH_FILE2");
+        File file = new File(getApplicationContext().getFilesDir(), "CASH_FILE2.json");
         JSONObject obj = new JSONObject();
         try {
             FileWriter fileWriter =new FileWriter(file);

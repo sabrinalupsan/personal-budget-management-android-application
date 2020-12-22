@@ -27,7 +27,7 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="save1">Save</string>
     <string name="ok1">OK</string>
-    <string name="cancel">Cancel</string>
+    <string name="cancel2">Cancel</string>
     <string name="wish_name">Wish Name</string>
     <string name="importance">Importance</string>
     <string name="deadline">Deadline</string>
@@ -39,7 +39,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="dd_mm_yyyy">dd/mm/yyyy</string>
-    <string name="add">Add</string>
+    <string name="add2">Add</string>
     <string name="credit_cards">Credit Cards</string>
     <string name="limit">Limit</string>
     <string name="go_to_calendar">Go to calendar</string>
@@ -52,8 +52,8 @@
 
     <string name="actual_amount">Actual amount</string>
     <string name="what_type_of_sum">What type of sum?</string>
-    <string name="expense">Expense</string>
-    <string name="income">Income</string>
+    <string name="expense2">Expense</string>
+    <string name="income2">Income</string>
     <string name="category">Category</string>
     <string name="food">Food</string>
     <string name="clothing">Clothing</string>
@@ -63,7 +63,7 @@
     <string name="select_the_category">Select the category:</string>
     <string name="credit_cards_history">Credit Cards History</string>
     <string name="category2">Category:</string>
-    <string name="ok">OK</string>
+    <string name="ok2">OK</string>
     <string name="back_to_the_initial_activity">Back to the initial activity</string>
     <color name="orange">#F7D358</color>
     <string-array name="choose_category">
@@ -76,7 +76,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="parse_to_json">Parse to JSON</string>
     <string name="get">Get</string>
-    <string name="save">Save</string>
+    <string name="save2">Save</string>
     <string name="get_all">get all</string>
     <string name="save_all">Save all</string>
     <string name="delete_all">Delete all</string>
@@ -102,11 +102,11 @@
     </string-array>
     <string name="title_activity_maps">Map</string>
     <string name="see_suggestions">See suggestions</string>
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
+    <string name="yes2">Yes</string>
+    <string name="no2">No</string>
     <string name="show_chart">Show chart</string>
-    <string name="ok">OK</string>
-    <string name="no">No</string>
+    <string name="ok3">OK</string>
+    <string name="no3">No</string>
     <string name="yes">Yes</string>
     <string name="insert1">insert</string>
     <string name="income">Income</string>
@@ -115,18 +115,18 @@
     <string name="date">Date</string>
     <string name="falseToggle">False</string>
     <string name="trueToggle">True</string>
-    <string name="ok">OK</string>
-    <string name="cancel">Cancel</string>
+    <string name="ok4">OK</string>
+    <string name="cancel3">Cancel</string>
     <string name="past_transactions">Past transactions</string>
     <string name="ok">OK</string>
-    <string name="cancel">Cancel</string>
+    <string name="cancel4">Cancel</string>
     <string name="change_settings">Change settings</string>
     <string name="add">Add</string>
     <string name="save">Save</string>
     <string name="second_fragment">Second fragment</string>
     <string name="back">Back</string>
-    <string name="textview">TextView</string>
-    <string name="textview">TextView</string>
-    <string name="textview">TextView</string>
-    <string name="textview">TextView</string>
+    <string name="textview1">TextView</string>
+    <string name="textview2">TextView</string>
+    <string name="textview3">TextView</string>
+    <string name="textview4">TextView</string>
 </resources>

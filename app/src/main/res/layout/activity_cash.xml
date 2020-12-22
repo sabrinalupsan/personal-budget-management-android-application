@@ -44,7 +44,7 @@
             android:id="@+id/btnCancel"
             android:layout_width="252dp"
             android:layout_height="wrap_content"
-            android:text="@string/no" />
+            android:text="@string/no2" />
     </RadioGroup>
 
     <fragment

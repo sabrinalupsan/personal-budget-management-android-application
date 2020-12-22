@@ -57,6 +57,7 @@ public class CashActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 databaseHelper.insertCash(cash);
+                btnNO.setEnabled(false);
                 try {
                     transactions = databaseHelper.selectAll();
                 } catch (ParseException e) {

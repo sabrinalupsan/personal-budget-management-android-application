@@ -6,6 +6,8 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -38,12 +41,13 @@ public class CashActivity extends AppCompatActivity {
     private LineData lineData;
     private ArrayList<Entry> entryList = new ArrayList<>();
     private Button btnChart;
+    private Context activityContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cash);
-
+        activityContext = this;
         initializeComponents();
 
         transactions = bundle.getParcelableArrayList("totalTransactions");
@@ -63,7 +67,6 @@ public class CashActivity extends AppCompatActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                //here i need to read everything from the database
                 fragment = ListFragment.newInstance(transactions);
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -74,8 +77,26 @@ public class CashActivity extends AppCompatActivity {
         btnNO.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setResult(0, intent);
-                finish();
+                AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(activityContext);
+                dlgAlert.setMessage("Are you sure?");
+                dlgAlert.setTitle("Incorrect information");
+                dlgAlert.setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                                setResult(0, intent);
+                                finish();
+                            }
+                        });
+                dlgAlert.setNegativeButton("No",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alertDialog=dlgAlert.create();
+                alertDialog.show();
+
             }
         });
         btnChart.setOnClickListener(new View.OnClickListener() {

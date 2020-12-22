@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.seminar_4.Cash.Cash;
+import com.example.seminar_4.Cash.DownloadAsync;
 import com.example.seminar_4.CashActivity;
 import com.example.seminar_4.R;
 
@@ -70,9 +72,22 @@ public class MainActivityCash extends AppCompatActivity {
         setContentView(R.layout.activity_main_cash);
 
         InitializeAllComponents();
+
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "Alpha-ul este: "+String.valueOf(img.getAlpha()));
+
+                if(img.getAlpha()!=0.0)
+                    img.animate().alpha(0f).setDuration(10);
+                else
+                    img.animate().alpha(100f).setDuration(10);
+            }
+
+        });
+
         OKbutton.setOnClickListener(new View.OnClickListener() {
 
-            @SuppressLint({"SimpleDateFormat", "WrongConstant"})
             @Override
             public void onClick(View view) {
                Intent intent = new Intent(getApplicationContext(), CashActivity.class);
@@ -86,7 +101,7 @@ public class MainActivityCash extends AppCompatActivity {
                 Log.d(TAG, "theType is "+theType);
 
                 if (theType == null)
-                    Toast.makeText(getApplicationContext(), "Please choose a type of transaction!", 5000).show();
+                    Toast.makeText(getApplicationContext(), "Please choose a type of transaction!", Toast.LENGTH_LONG).show();
                 else {
                     Cash cash = getInfoFromControls();
                     bundle.putParcelable("value", cash);
@@ -112,7 +127,7 @@ public class MainActivityCash extends AppCompatActivity {
         amount.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-
+                tvSeekBar.setText("Selected amount: "+String.valueOf(seekBar.getProgress()));
             }
 
             @Override
@@ -262,9 +277,10 @@ public class MainActivityCash extends AppCompatActivity {
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
             JSONObject jsonObject = new JSONObject();
-            JSONObject joCollectionOfIncomes = new JSONObject();
-            JSONObject joCollectionOfExpenses = new JSONObject();
-            JSONObject joCollectionOfOthers = new JSONObject();
+            JSONArray joCollectionOfIncomes = new JSONArray();
+            JSONArray joCollectionOfExpenses = new JSONArray();
+            JSONArray joCollectionOfOthers = new JSONArray();
+
             JSONArray jaIncome = new JSONArray();
             JSONArray jaExpense = new JSONArray();
             JSONArray jaOther = new JSONArray();
@@ -272,10 +288,13 @@ public class MainActivityCash extends AppCompatActivity {
             for (int i = 0; i < transactions.size(); i++) {
                 Cash c = transactions.get(i);
                 JSONObject joBook = new JSONObject();
+                JSONObject joCharacteristics = new JSONObject();
                 joBook.put("type", c.getType());
                 joBook.put("amount", c.getCashAmount());
-                joBook.put("rating", c.getRating());
-                joBook.put("date", c.getDate());
+                joCharacteristics.put("date", c.getDate());
+                joCharacteristics.put("rating", c.getRating());
+                joCharacteristics.put("from savings", c.isFromSavings());
+                joBook.put("details", joCharacteristics);
                 if(c.getType().compareTo("Income")==0)
                     jaIncome.put(joBook);
                 else
@@ -289,15 +308,15 @@ public class MainActivityCash extends AppCompatActivity {
             //Log.d(TAG, "Content: "+jaTransactions);
             for(int i=0; i<jaIncome.length(); i++)
             {
-                joCollectionOfIncomes.put("Income"+(i+1), jaIncome.getJSONObject(i));
+                joCollectionOfIncomes.put(jaIncome.getJSONObject(i));
             }
             for(int i=0; i<jaExpense.length(); i++)
             {
-                joCollectionOfExpenses.put("Expense"+(i+1), jaExpense.getJSONObject(i));
+                joCollectionOfExpenses.put(jaExpense.getJSONObject(i));
             }
             for(int i=0; i<jaOther.length(); i++)
             {
-                joCollectionOfOthers.put("Others"+(i+1), jaOther.getJSONObject(i));
+                joCollectionOfOthers.put(jaOther.getJSONObject(i));
             }
             jsonObject.put("My Income", joCollectionOfIncomes);
             jsonObject.put("My Expenses", joCollectionOfExpenses);
@@ -305,7 +324,11 @@ public class MainActivityCash extends AppCompatActivity {
             obj = jsonObject;
             String userString = obj.toString();
             bufferedWriter.write(userString);
-            Log.d(TAG, "Content: "+jsonObject);
+
+            DownloadAsync downloadAsync = new DownloadAsync();
+            downloadAsync.execute("https://ptsv2.com/t/j5cq1-1606468043/post", userString);
+
+            //Log.d(TAG, "Content: "+jsonObject);
             //joCollectionOfTransactions.put(jaTransactions)
             bufferedWriter.close();
         } catch (JSONException | IOException e) {

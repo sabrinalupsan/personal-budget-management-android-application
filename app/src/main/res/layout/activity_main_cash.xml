@@ -47,21 +47,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Income" />
+                android:text="@string/income" />
 
             <RadioButton
                 android:id="@+id/radioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Expense" />
+                android:text="@string/expense" />
 
             <RadioButton
                 android:id="@+id/radioButton3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Other" />
+                android:text="@string/other" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -96,7 +96,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:inputType="date"
-            android:text="Date" />
+            android:text="@string/date" />
     </LinearLayout>
 
     <LinearLayout
@@ -131,8 +131,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/planned"
-            android:textOff="False"
-            android:textOn="True" />
+            android:textOff="@string/falseToggle"
+            android:textOn="@string/trueToggle" />
 
     </LinearLayout>
 
@@ -159,14 +159,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="OK" />
+            android:text="@string/ok" />
 
         <Button
             android:id="@+id/btnCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cancel" />
+            android:text="@string/cancel" />
     </LinearLayout>
 
     <LinearLayout

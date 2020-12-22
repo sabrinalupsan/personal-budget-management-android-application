@@ -36,7 +36,7 @@
             android:id="@+id/btnSave"
             android:layout_width="188dp"
             android:layout_height="wrap_content"
-            android:text="Yes"
+            android:text="@string/yes"
             android:textColor="#EF1818"
             android:textColorHighlight="#FFFFFF" />
 
@@ -44,7 +44,7 @@
             android:id="@+id/btnCancel"
             android:layout_width="252dp"
             android:layout_height="wrap_content"
-            android:text="No" />
+            android:text="@string/no" />
     </RadioGroup>
 
     <fragment
@@ -57,11 +57,11 @@
         android:id="@+id/btnChart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Show chart" />
+        android:text="@string/show_chart" />
 
     <Button
         android:id="@+id/btnOK"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="OK" />
+        android:text="@string/ok" />
 </LinearLayout>

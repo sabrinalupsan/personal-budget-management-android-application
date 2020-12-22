@@ -102,4 +102,31 @@
     </string-array>
     <string name="title_activity_maps">Map</string>
     <string name="see_suggestions">See suggestions</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="show_chart">Show chart</string>
+    <string name="ok">OK</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="insert1">insert</string>
+    <string name="income">Income</string>
+    <string name="expense">Expense</string>
+    <string name="other">Other</string>
+    <string name="date">Date</string>
+    <string name="falseToggle">False</string>
+    <string name="trueToggle">True</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="past_transactions">Past transactions</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="change_settings">Change settings</string>
+    <string name="add">Add</string>
+    <string name="save">Save</string>
+    <string name="second_fragment">Second fragment</string>
+    <string name="back">Back</string>
+    <string name="textview">TextView</string>
+    <string name="textview">TextView</string>
+    <string name="textview">TextView</string>
+    <string name="textview">TextView</string>
 </resources>

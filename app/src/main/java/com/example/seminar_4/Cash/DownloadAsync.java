@@ -32,44 +32,30 @@ public class DownloadAsync extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... strings) {
         String urlString = strings[0]; // URL to call
-        /*String yourURLStr = null;
+        String yourURLStr = null;
         try {
             yourURLStr = "http://host.com?param=" + java.net.URLEncoder.encode(urlString, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-        }*/
-        String data = strings[1]; //data to post
-        JSONObject object=null;
-        try {
-            object = (JSONObject) new JSONTokener(data).nextValue();
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
+        String data = strings[1]; //data to post
+
         OutputStream out = null;
 
         try {
 
-            URL url = new URL(urlString);
+            URL url = new URL(yourURLStr);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("POST");
-            urlConnection.setDoOutput(true);
+            //urlConnection.setDoOutput(true);
             urlConnection.setRequestProperty("Connection", "Keep-Alive");
-            urlConnection.setRequestProperty(
-                    "\\r\\nContent-Type:", " multipart/form-data; boundary=*****\\r\\n");
 
             DataOutputStream request = new DataOutputStream(
                     urlConnection.getOutputStream());
-            request.writeBytes("\\r\\n--*****--\\r\\n");
 
-            request.writeBytes("\\r\\nContent-Disposition: form-data; name=\"" +
-                    "myfile" + "\"; filename=\"" +
-                    "LUPSAN_SABRINA_FILE.json" + "\"");
-            request.writeBytes("\\r\\n");
             request.writeBytes(data);
-            request.writeBytes("\\r\\n--*****--\\r\\n");
             request.flush();
             request.close();
-            Log.d(TAG, urlString);
 
             urlConnection.connect();
 
@@ -85,7 +71,5 @@ public class DownloadAsync extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        Log.d(TAG, "Content: "+s);
-
     }
 }

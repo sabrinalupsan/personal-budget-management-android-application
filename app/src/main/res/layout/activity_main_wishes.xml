@@ -34,7 +34,7 @@
         android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add"
+        android:text="@string/add"
         android:onClick="startAddWish"/>
 
     <GridView
@@ -48,7 +48,7 @@
         android:id="@+id/btnSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save"
+        android:text="@string/save"
         android:onClick="btnSave"/>
 
 </LinearLayout>

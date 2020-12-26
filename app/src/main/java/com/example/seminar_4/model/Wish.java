@@ -1,4 +1,4 @@
-package com.example.sem4.model;
+package com.example.seminar_4.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

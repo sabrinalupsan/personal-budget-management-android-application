@@ -15,7 +15,7 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.sem4.model.Wish;
+import com.example.seminar_4.model.Wish;
 import com.example.seminar_4.R;
 
 import java.text.ParseException;
@@ -70,7 +70,7 @@ public class AddWishActivity extends AppCompatActivity {
     private Wish buildWishFromWidgets() {
         try {
             Date date = null;
-            SimpleDateFormat formater = new SimpleDateFormat("dd/mm/yyyy", Locale.US);
+            SimpleDateFormat formater = new SimpleDateFormat("dd/mm/yyyy", Locale.UK);
             try {
                 date = formater.parse(deadline.getText().toString());
 //            wish.setDeadline(date);

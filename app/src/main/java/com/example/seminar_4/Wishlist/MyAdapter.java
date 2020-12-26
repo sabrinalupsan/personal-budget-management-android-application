@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.example.sem4.model.Wish;
+import com.example.seminar_4.model.Wish;
 import com.example.seminar_4.Cash.DownloadContent;
 import com.example.seminar_4.R;
 

@@ -12,7 +12,7 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.sem4.model.Wish;
+import com.example.seminar_4.model.Wish;
 import com.example.seminar_4.R;
 
 import org.json.JSONArray;
@@ -142,7 +142,7 @@ public class MainActivityWishlist extends AppCompatActivity  {
         if(requestCode== ADD_WISH_REQUEST_CODE&&resultCode==RESULT_OK&&data!=null){
             Wish wish =(Wish)data.getSerializableExtra("wish"); // getParcealableExtra for yk
             if(wish!=null){
-                Toast.makeText(getApplicationContext(),"Wish was added succesfully",Toast.LENGTH_LONG);
+                Toast.makeText(getApplicationContext(),"Wish was added succesfully",Toast.LENGTH_LONG).show();
                 wishList.add(wish);
                 ArrayAdapter adapter=(ArrayAdapter)lvWishes.getAdapter();
             }

@@ -19,11 +19,7 @@ import android.widget.Toast;
 import android.widget.GridView;
 import com.example.s4.BudgetApp.CreditEntry;
 import com.example.seminar_4.Cash.DownloadContent;
-import com.example.seminar_4.EditDatabase;
 import com.example.seminar_4.R;
-import com.example.seminar_4.RepoDatabase;
-import com.example.seminar_4.User;
-import com.example.seminar_4.UserDataSource;
 
 
 import org.json.JSONArray;
@@ -38,7 +34,6 @@ public class RegistrationList extends AppCompatActivity {
     public CreditEntry p200;
     ArrayAdapter adapter2;
     public ArrayList<CreditEntry> creditEntries = new ArrayList<>();
-    RepoDatabase repoDatabase;
     private Spinner spn;
     JSONArray jsonArray = new JSONArray();
     CreditEntry c1,c2,c3;
@@ -141,83 +136,8 @@ public class RegistrationList extends AppCompatActivity {
             Log.d(TAG, "---------------JSON Object-------------------------");
             Log.d(TAG, jsonArray.toString());
 
-
-
-        repoDatabase = RepoDatabase.getInstance(this);
-        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-               callEditing(view, position);
-
-            }
-        });
     }
 
-
-
-    private void checkSharedPreferences(){
-
-    }
-
-
-
-    public void callEditing(View view, int position)
-    {
-        Intent intent = new Intent(this, EditDatabase.class);
-        Bundle bundle = new Bundle();
-
-        CreditEntry selItem = (CreditEntry)gv.getItemAtPosition(position);
-
-        bundle.putString("parameter1", String.valueOf(position));
-        bundle.putString("parameter2", selItem.getLimit());
-        bundle.putString("parameter3", selItem.getAmount());
-        bundle.putString("parameter4", selItem.getType());
-        bundle.putString("parameter5", selItem.getCategory());
-        bundle.putString("parameter6", selItem.getDate());
-        intent.putExtras(bundle);
-        startActivity(intent);
-    }
-
-    public void save(View view)
-    {
-            final UserDataSource userDataSource = new UserDataSource(repoDatabase.userDao());
-
-            for(int i=0;i<creditEntries.size();i++) {
-                final User user = new User(String.valueOf(i), creditEntries.get(i).getLimit(), creditEntries.get(i).getAmount(),
-                        creditEntries.get(i).getType(), creditEntries.get(i).getCategory(), creditEntries.get(i).getDate());
-                userDataSource.insertUser(user);
-            }
-    }
-
-
-
-
-    public void get(View view) {
-        final UserDataSource userDataSource = new UserDataSource(repoDatabase.userDao());
-        Log.d(TAG, "----------------------Elements in the db---------------------");
-        try {
-            for (int i = 0; i < creditEntries.size(); i++) {
-
-                    User user = userDataSource.getUser(String.valueOf(i));
-                if (user != null) {
-                    Log.d(TAG, user.getId() + " " + user.getMLimit() + " " + user.getMAmount() + " " + user.getMType() + " "
-                            + user.getMCategory() +  " " + user.getMDate());
-                }
-            }
-        }catch(Exception ex) {
-            Log.e(TAG, "NO DATA IN THE DB");
-            ex.printStackTrace();
-        }
-    }
-
-
-
-    public void deleteAll(View view)
-    {
-        final UserDataSource userDataSource = new UserDataSource(repoDatabase.userDao());
-        userDataSource.deleteAllUsers();
-    }
 
 
 

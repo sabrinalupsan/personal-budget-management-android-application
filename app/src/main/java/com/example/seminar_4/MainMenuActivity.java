@@ -22,8 +22,7 @@ import android.widget.Toast;
 
 import com.example.seminar_4.Cash.Cash;
 import com.example.seminar_4.Cash.CashDBHelper;
-import com.example.seminar_4.Cash.DownloadAsync;
-import com.example.seminar_4.CreditCards.MainActivity;
+import com.example.seminar_4.CreditCards.BankDetails;
 import com.example.seminar_4.Wishlist.MainActivityWishlist;
 
 import org.json.JSONArray;
@@ -116,7 +115,7 @@ public class MainMenuActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), BankDetails.class);
                         startActivityForResult(intent, REQUEST_CODE);
                     }
             }

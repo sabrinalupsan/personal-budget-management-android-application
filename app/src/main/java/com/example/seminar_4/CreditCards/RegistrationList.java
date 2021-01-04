@@ -38,33 +38,11 @@ public class RegistrationList extends AppCompatActivity {
     JSONArray jsonArray = new JSONArray();
     CreditEntry c1,c2,c3;
 
-    private SharedPreferences mPreferences;
-    private SharedPreferences.Editor mEditor;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_list);
-
-        DownloadContent.handler = new Handler()
-        {
-            @Override
-            public void handleMessage(@NonNull Message msg) {
-                Log.d(TAG, "----------image received from thread------------");
-                Bundle data = msg.getData();
-                Bitmap image = data.getParcelable("image");
-
-            }
-        };
-
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mEditor = mPreferences.edit();
-//        mEditor.putString("key", "bogdan");
-//        mEditor.commit();
-//
-//        String name = mPreferences.getString("key", "All");
-
 
 
 

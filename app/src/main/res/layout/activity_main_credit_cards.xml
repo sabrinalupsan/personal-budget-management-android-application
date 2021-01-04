@@ -44,7 +44,6 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="8dp"
-        android:max="150"
         android:min="0"
         android:progress="1"
         android:thumb="@android:drawable/arrow_up_float"

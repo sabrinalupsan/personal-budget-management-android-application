@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private SeekBar seekbar;
     private TextView tv_SeekBarValue;
     private TextView tv;
+    private String sIBAN, sLimit;
 
 
     @Override
@@ -30,8 +31,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_credit_cards);
 
+
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
+
+        sIBAN = extras.getString("paramIBAN");
+        sLimit = extras.getString("paramLimit");
 
     }
 
@@ -58,22 +63,23 @@ public class MainActivity extends AppCompatActivity {
     {
         seekbar = (SeekBar)findViewById(R.id.sb_limit);
         tv_SeekBarValue = findViewById(R.id.tv_seekBarValue);
+        seekbar.setMax(Integer.parseInt(sLimit));
         tv_SeekBarValue.setText(seekbar.getProgress() + "/" + seekbar.getMax());
 
         seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                tv_SeekBarValue.setText(seekbar.getProgress() + "/" + seekbar.getMax());
+                tv_SeekBarValue.setText(seekbar.getProgress() + "/" + sLimit);
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                tv_SeekBarValue.setText(seekbar.getProgress() + "/" + seekbar.getMax());
+                tv_SeekBarValue.setText(seekbar.getProgress() + "/" + sLimit);
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                tv_SeekBarValue.setText(seekbar.getProgress() + "/" + seekbar.getMax());
+                tv_SeekBarValue.setText(seekbar.getProgress() + "/" + sLimit);
 
             }
         });
@@ -154,14 +160,17 @@ public class MainActivity extends AppCompatActivity {
                 String param8 = extras.getString("param8");
                 tv = (TextView)findViewById(R.id.tv_DatePlace);
                 tv.setText(param8);
-
-
             }
         }
-//        else if(requestCode == 300){
-//            setResult(RESULT_OK);
-//            finish();
-//            }
+        else if(requestCode == 1011 || requestCode == 1012) {
+            if (data != null) {
+                Intent intent = getIntent();
+                Bundle extras = intent.getExtras();
+
+                sIBAN = extras.getString("paramIBAN");
+                sLimit = extras.getString("paramLimit");
+            }
+        }
     }
 
 

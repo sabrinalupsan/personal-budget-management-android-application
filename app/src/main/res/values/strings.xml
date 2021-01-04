@@ -41,7 +41,6 @@
     <string name="dd_mm_yyyy">dd/mm/yyyy</string>
     <string name="add2">Add</string>
     <string name="credit_cards">Credit Cards</string>
-    <string name="limit">Limit</string>
     <string name="go_to_calendar">Go to calendar</string>
     <string name="next">Next</string>
     <string name="btn_ok">btn_ok</string>
@@ -71,6 +70,19 @@
         <item>Food</item>
         <item>Clothing</item>
         <item>Services</item>
+
+    </string-array>
+
+    <string-array name="choose_bank">
+        <item>ING</item>
+        <item>BCR</item>
+        <item>BRD</item>
+        <item>Transilvania</item>
+        <item>Alpha Bank</item>
+        <item>First Bank</item>
+        <item>OTP Bank</item>
+        <item>Libra Bank</item>
+        <item>Raiffeisen</item>
 
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
@@ -129,4 +141,11 @@
     <string name="textview2">TextView</string>
     <string name="textview3">TextView</string>
     <string name="textview4">TextView</string>
+    <string name="limit">Limit</string>
+    <string name="bank_details">BANK DETAILS</string>
+    <string name="bank_name">Bank Name</string>
+    <string name="insert_the_iban">Insert the IBAN</string>
+    <string name="iban">IBAN</string>
+    <string name="cancel">Cancel</string>
+    <string name="amount_of_money_lei">Amount of money (lei)</string>
 </resources>

@@ -26,57 +26,57 @@ public class MainActivity extends AppCompatActivity {
     private String sIBAN, sLimit;
 
 
-    @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_credit_cards);
-
-    }
-
-    @Override
-    protected void onStart()
-    {
-        // TODO Auto-generated method stub
-        super.onStart();
-        Progress(findViewById(R.id.tv_seekBarValue));
-    }
-
-
-    @Override
-    protected void onResume()
-    {
-        // TODO Auto-generated method stub
-        super.onResume();
-        Progress(findViewById(R.id.tv_seekBarValue));
-    }
-
-
-
-    public void Progress(View view)
-    {
-        seekbar = (SeekBar)findViewById(R.id.sb_limit);
-        tv_SeekBarValue = findViewById(R.id.tv_seekBarValue);
-        seekbar.setMax(Integer.parseInt(sLimit));
-        tv_SeekBarValue.setText(seekbar.getProgress() + "/" + seekbar.getMax());
-
-        seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                tv_SeekBarValue.setText(seekbar.getProgress() + "/" + sLimit);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                tv_SeekBarValue.setText(seekbar.getProgress() + "/" + sLimit);
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                tv_SeekBarValue.setText(seekbar.getProgress() + "/" + sLimit);
-
-            }
-        });
-    }
+//    @Override
+//    protected void onCreate(final Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_main_credit_cards);
+//
+//    }
+//
+//    @Override
+//    protected void onStart()
+//    {
+//        // TODO Auto-generated method stub
+//        super.onStart();
+//        Progress(findViewById(R.id.tv_seekBarValue));
+//    }
+//
+//
+//    @Override
+//    protected void onResume()
+//    {
+//        // TODO Auto-generated method stub
+//        super.onResume();
+//        Progress(findViewById(R.id.tv_seekBarValue));
+//    }
+//
+//
+//
+//    public void Progress(View view)
+//    {
+//        seekbar = (SeekBar)findViewById(R.id.sb_limit);
+//        tv_SeekBarValue = findViewById(R.id.tv_seekBarValue);
+//        seekbar.setMax(Integer.parseInt(sLimit));
+//        tv_SeekBarValue.setText(seekbar.getProgress() + "/" + seekbar.getMax());
+//
+//        seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//            @Override
+//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+//                tv_SeekBarValue.setText(seekbar.getProgress() + "/" + sLimit);
+//            }
+//
+//            @Override
+//            public void onStartTrackingTouch(SeekBar seekBar) {
+//                tv_SeekBarValue.setText(seekbar.getProgress() + "/" + sLimit);
+//            }
+//
+//            @Override
+//            public void onStopTrackingTouch(SeekBar seekBar) {
+//                tv_SeekBarValue.setText(seekbar.getProgress() + "/" + sLimit);
+//
+//            }
+//        });
+//    }
 
     public void callSecondActivity(View view)
     {

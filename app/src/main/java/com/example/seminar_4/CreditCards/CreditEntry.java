@@ -1,25 +1,31 @@
-package com.example.s4.BudgetApp;
+package com.example.seminar_4.CreditCards;
 
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 
 public class CreditEntry implements Serializable {
-   private String limit, amount, type, category, date;
+   private String iban, amount, type, category, date;
 
-    public CreditEntry(String limit, String amount, String type, String category, String date)
+    public CreditEntry(String iban, String amount, String type, String category, String date)
     {
-        this.limit = limit;
+        this.iban = iban;
         this.amount = amount;
         this.type = type;
         this.category = category;
         this.date = date;
     }
 
-    public String getLimit(){ return limit;}
-    public void setLimit(String limit){this.limit = limit;}
+    public String getIban() {
+        return iban;
+    }
+
+    public void setIban(String iban) {
+        this.iban = iban;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getAmount(){return amount;}
     public void setAmount(String amount){this.amount = amount;}
@@ -36,7 +42,7 @@ public class CreditEntry implements Serializable {
 
     @Override
     public String toString() {
-        return "Limit: " + this.limit + ", Amount: " + this.amount + ", Type: " + this.type +
+        return "IBAN: " + this.iban + ", Amount: " + this.amount + ", Type: " + this.type +
                 ", Category: " + this.category + ", Date: " + this.date;
     }
 }

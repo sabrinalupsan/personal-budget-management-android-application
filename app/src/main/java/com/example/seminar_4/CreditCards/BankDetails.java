@@ -40,7 +40,7 @@ public class BankDetails extends AppCompatActivity {
         final AccountDBHelper accountDBHelper = new AccountDBHelper(this);
 
 
-        final Cursor cursor = accountDBHelper.getDataCursor();
+        final Cursor cursor = accountDBHelper.getDataCursorAccount();
         final SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this,
                 android.R.layout.simple_list_item_2,
                 cursor,
@@ -75,20 +75,17 @@ public class BankDetails extends AppCompatActivity {
             public void onClick(View view) {
 
                 final AccountDBHelper accountDBHelper = new AccountDBHelper(context);
+                EditText etIBAN = findViewById(R.id.et_IBAN);
+                EditText etLimit = findViewById(R.id.et_limit);
+                spn = findViewById(R.id.spn_bankName);
+
+                accountDBHelper.insertSampleAccount(etIBAN.getText().toString(), spn.getSelectedItem().toString(), etLimit.getText().toString());
 
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 Bundle bundle = new Bundle();
-
-                EditText etIBAN = findViewById(R.id.et_IBAN);
                 bundle.putString("paramIBAN", etIBAN.getText().toString());
-
-                EditText etLimit = findViewById(R.id.et_limit);
                 bundle.putString("paramLimit", etLimit.getText().toString());
-
                 intent.putExtras(bundle);
-
-                spn = findViewById(R.id.spn_bankName);
-                accountDBHelper.insertSample(etIBAN.getText().toString(), spn.getSelectedItem().toString(), etLimit.getText().toString());
 
                 startActivityForResult(intent, 1011);
             }

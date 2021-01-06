@@ -3,23 +3,30 @@ package com.example.seminar_4.CreditCards;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-public class AccountTable {
+public class TransactionTable {
 
 
     // Database table
-    public static final String TABLE_TODO = "Account";
-    public static final String COLUMN_IBAN = "_id";
-    public static final String COLUMN_BANK = "Bank";
-    public static final String COLUMN_LIMIT = "AmountLimit";
+    public static final String TABLE_TODO = "'Transaction'";
+    public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_IBAN = "IBAN";
+    public static final String COLUMN_AMOUNT = "ActualAmount";
+    public static final String COLUMN_SUMTYPE = "SumType";
+    public static final String COLUMN_CATEGORY = "Category";
+    public static final String COLUMN_DATE = "Date";
+
 
 
     // Database creation SQL statement
     private static final String DATABASE_CREATE = "create table "
             + TABLE_TODO
             + " ("
-            + COLUMN_IBAN + " text primary key, "
-            + COLUMN_BANK + " text not null, "
-            + COLUMN_LIMIT + " text not null); ";
+            + COLUMN_ID + " integer primary key autoincrement,"
+            + COLUMN_IBAN + " text not null, "
+            + COLUMN_AMOUNT + " text not null, "
+            + COLUMN_SUMTYPE + " text not null, "
+            + COLUMN_CATEGORY + " text not null, "
+            + COLUMN_DATE + " text not null); ";
 
     public static void onCreate(SQLiteDatabase database) {
         database.execSQL(DATABASE_CREATE);

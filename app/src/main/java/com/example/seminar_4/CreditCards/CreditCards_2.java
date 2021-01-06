@@ -7,9 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.s4.BudgetApp.CreditEntry;
-import com.example.seminar_4.CreditCards.RegistrationList;
 import com.example.seminar_4.R;
 
 
@@ -17,7 +14,7 @@ import java.util.ArrayList;
 
 public class CreditCards_2 extends AppCompatActivity {
 
-    private TextView seekBar;
+    private String iban;
     private TextView amount;
     private TextView typeSum;
     private TextView category;
@@ -38,12 +35,8 @@ public class CreditCards_2 extends AppCompatActivity {
         ArrayList<String> param5 = extras.getStringArrayList("param5");
         String param9 = extras.getString("param9");
 
-        Toast.makeText(this, param1, Toast.LENGTH_SHORT).show();
 
-        seekBar = (TextView)findViewById(R.id.tv_limitCorrect);
-        seekBar.setText(param2);
-
-
+        iban = param2;
         amount = (TextView)findViewById(R.id.tv_amountCorrect);
         amount.setText(param3);
 
@@ -75,50 +68,23 @@ public class CreditCards_2 extends AppCompatActivity {
     public void CallListActivity(View view)
     {
 
-        Intent intent = new Intent(this, RegistrationList.class);
-        //Intent intent = new Intent(this, ListFragment.class);
 
+        Intent intent = new Intent(this, RegistrationList.class);
         Bundle extras = new Bundle();
-        //bundle.putString("p1", "Your activity was added to the list");
         CreditEntry creditEntry = CreateEntry();
 
+        final AccountDBHelper accountDBHelper = new AccountDBHelper(this);
+        accountDBHelper.insertSampleTransaction(creditEntry.getIban(), creditEntry.getAmount(), creditEntry.getType(),
+                creditEntry.getCategory(), creditEntry.getDate());
+
         extras.putSerializable("p200", creditEntry);
-        //Intent intent = new Intent();
         intent.putExtras(extras);
-        // AddBundleForFragment();
-
-
-        //Intent intent = new Intent(this, ListFragment.class);
-     //   ListFragment fragment = new ListFragment();
-       // Bundle bundle = new Bundle();
-       // bundle.putString("p100", "Your activity was added to the list");
-
-        //CreditEntry creditEntry = CreateEntry();
-        //bundle.putSerializable("p200", creditEntry);
-
-
-      //  fragment.setArguments(bundle);
-
-//        ListFragment fragment = new ListFragment();
-//        fragment.setArguments(bundle);
-//
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        fragmentTransaction.replace(R.id.fragment, fragment);
-//        fragmentTransaction.commit();
-
-
-        //intent.putExtras(bundle);
-        //startActivityForResult(intent, 300);
         startActivity(intent);
     }
 
 
-
-
     public CreditEntry CreateEntry(){
-
-        CreditEntry creditEntry = new CreditEntry(seekBar.getText().toString(), amount.getText().toString(),
+        CreditEntry creditEntry = new CreditEntry(iban, amount.getText().toString(),
                 typeSum.getText().toString(), category.getText().toString(), date.getText().toString());
         return creditEntry;
     }

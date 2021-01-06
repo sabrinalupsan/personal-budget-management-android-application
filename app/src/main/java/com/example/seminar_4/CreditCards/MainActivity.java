@@ -31,13 +31,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_credit_cards);
 
-
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-
-        sIBAN = extras.getString("paramIBAN");
-        sLimit = extras.getString("paramLimit");
-
     }
 
     @Override
@@ -90,11 +83,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CreditCards_2.class);
         Bundle bundle = new Bundle();
 
-        bundle.putString("param1", "Data received from MainActivity!");
-
         // startActivity(intent);
-        TextView value = ((TextView)findViewById(R.id.tv_seekBarValue));
-        bundle.putString("param2", value.getText().toString());
+        bundle.putString("param2", sIBAN);
 
         TextView value2 = (TextView)findViewById(R.id.et_actualAmount);
         bundle.putString("param3", value2.getText().toString());

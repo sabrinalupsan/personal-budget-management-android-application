@@ -33,15 +33,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <GridView
-            android:id="@+id/gv_information"
+        <ListView
+            android:id="@+id/lv_transactions"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:clickable="true"
-
-            >
-
-        </GridView>
+            android:layout_height="282dp" />
 
         <Button
             android:id="@+id/btn_backToMain"
@@ -58,19 +53,19 @@
 
             <Button
                 android:id="@+id/button2"
-                android:layout_width="125dp"
+                android:layout_width="144dp"
                 android:layout_height="wrap_content"
                 android:text="@string/save_all" />
 
             <Button
                 android:id="@+id/button4"
-                android:layout_width="123dp"
+                android:layout_width="139dp"
                 android:layout_height="wrap_content"
                 android:text="@string/get_all" />
 
             <Button
                 android:id="@+id/button5"
-                android:layout_width="125dp"
+                android:layout_width="128dp"
                 android:layout_height="wrap_content"
                 android:text="@string/delete_all" />
 

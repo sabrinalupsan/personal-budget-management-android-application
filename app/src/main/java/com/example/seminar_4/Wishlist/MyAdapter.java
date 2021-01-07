@@ -140,7 +140,7 @@ public class MyAdapter extends BaseAdapter {
 
         Wish wish = wishList.get(getItemId(position));
         holder.name.setText(wish.getName());
-        holder.atributes.setText(wish.getAtributes());
+        holder.atributes.setText(wish.getCategory());
 //        if( wish.getCategory()=="experience")
         System.out.println("bbbbb"+images.get(0).toString());
         for (Image image : images) {

@@ -17,10 +17,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.example.seminar_4.model.Image;
 import com.example.seminar_4.model.Wish;
 import com.example.seminar_4.Cash.DownloadContent;
 import com.example.seminar_4.R;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import static android.content.ContentValues.TAG;
@@ -30,13 +32,13 @@ public class MyAdapter extends BaseAdapter {
     Map<Long, Wish> wishList;
     LayoutInflater layoutInflater;
     Context context;
-    Bitmap image;
+    ArrayList<Image> images;
    public boolean checked;
 
-    public MyAdapter(Context context, Map<Long, Wish> wishList, Bitmap image) {
+    public MyAdapter(Context context, Map<Long, Wish> wishList, ArrayList<Image> images) {
         this.wishList = wishList;
         this.context = context;
-        this.image=image;
+        this.images=images;
         this.layoutInflater = LayoutInflater.from(context);
         createCheckedHolder();
 
@@ -139,7 +141,17 @@ public class MyAdapter extends BaseAdapter {
         Wish wish = wishList.get(getItemId(position));
         holder.name.setText(wish.getName());
         holder.atributes.setText(wish.getAtributes());
-        holder.img.setImageBitmap(this.image);
+//        if( wish.getCategory()=="experience")
+        System.out.println("bbbbb"+images.get(0).toString());
+        for (Image image : images) {
+            if(wish.getCategory()==image.getCategory()){
+                holder.img.setImageBitmap(image.getImage());
+
+            }
+        }
+//        holder.img.setImageBitmap(this.images.get((int) getItemId(position)-1));
+//        else
+//            holder.img.setImageBitmap(this.images.get(1));
 
 //        holder.filtered.setChecked(checkedHolder[position]);
 //        holder.filtered.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -160,13 +172,13 @@ public class MyAdapter extends BaseAdapter {
         checkedHolder = new boolean[getCount()];
     }
 
-    public void downloadImage(View view) {
-        Log.d(TAG, "----------downloadImage method------------");
-        DownloadContent imageTask = new DownloadContent("http://pdm.ase.ro/images/tehnologii.png");
-        Thread downloadThread = new Thread(imageTask);
-        downloadThread.start();
-
-    }
+//    public void downloadImage(View view) {
+//        Log.d(TAG, "----------downloadImage method------------");
+//        DownloadContent imageTask = new DownloadContent("http://pdm.ase.ro/images/tehnologii.png");
+//        Thread downloadThread = new Thread(imageTask);
+//        downloadThread.start();
+//
+//    }
     }
 
 

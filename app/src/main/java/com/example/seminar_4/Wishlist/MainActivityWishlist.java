@@ -1,10 +1,14 @@
 package com.example.seminar_4.Wishlist;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -12,6 +16,7 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.seminar_4.Cash.DownloadContent;
 import com.example.seminar_4.model.Wish;
 import com.example.seminar_4.R;
 
@@ -24,6 +29,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static android.content.ContentValues.TAG;
 
 public class MainActivityWishlist extends AppCompatActivity  {
 
@@ -43,12 +50,31 @@ public class MainActivityWishlist extends AppCompatActivity  {
 //        repoDatabase = RepoDataBase.getInstance(this);
         init();
         
-        addLvWishesAdapter();
+
+        Log.d(TAG, "----------downloadImage method------------");
+        DownloadContent imageTask = new DownloadContent("https://didmdw8v48h5q.cloudfront.net/wp-content/uploads/2019/12/New-York-Study-915x580-1.jpg");
+        Thread downloadThread = new Thread(imageTask);
+        downloadThread.start();
+
+        //casgList.get(i).
+
+            DownloadContent.handler = new Handler()
+            {
+                @Override
+                public void handleMessage(@NonNull Message msg) {
+                    Log.d(TAG, "----------image received from thread------------");
+                    Bundle data = msg.getData();
+                    Bitmap image = data.getParcelable("image");
+//                    holder.img.setImageBitmap(image);
+                    addLvWishesAdapter(image);
+
+                }
+            };
     }
 
 
 
-    private void addLvWishesAdapter() {
+    private void addLvWishesAdapter(Bitmap image) {
         ArrayAdapter<Wish> adapter= new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, //aici bag layout ul facut de mn
                 wishList);
         lvWishes.setAdapter(adapter);
@@ -112,7 +138,7 @@ public class MainActivityWishlist extends AppCompatActivity  {
 //            wishMap.put(wish.getId(), wish);
 //        }
 //
-        MyAdapter customAdapter = new MyAdapter(this, wishMap);
+        MyAdapter customAdapter = new MyAdapter(this, wishMap,image);
         gvWishes.setAdapter(customAdapter);
 //        customAdapter.
 

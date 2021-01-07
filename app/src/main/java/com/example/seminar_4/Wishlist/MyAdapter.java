@@ -30,11 +30,13 @@ public class MyAdapter extends BaseAdapter {
     Map<Long, Wish> wishList;
     LayoutInflater layoutInflater;
     Context context;
+    Bitmap image;
    public boolean checked;
 
-    public MyAdapter(Context context, Map<Long, Wish> wishList) {
+    public MyAdapter(Context context, Map<Long, Wish> wishList, Bitmap image) {
         this.wishList = wishList;
         this.context = context;
+        this.image=image;
         this.layoutInflater = LayoutInflater.from(context);
         createCheckedHolder();
 
@@ -89,10 +91,10 @@ public class MyAdapter extends BaseAdapter {
 
             holder.img = convertView.findViewById(R.id.imageView);
 
-            Log.d(TAG, "----------downloadImage method------------");
-            DownloadContent imageTask = new DownloadContent("https://didmdw8v48h5q.cloudfront.net/wp-content/uploads/2019/12/New-York-Study-915x580-1.jpg");
-            Thread downloadThread = new Thread(imageTask);
-            downloadThread.start();
+//            Log.d(TAG, "----------downloadImage method------------");
+//            DownloadContent imageTask = new DownloadContent("https://didmdw8v48h5q.cloudfront.net/wp-content/uploads/2019/12/New-York-Study-915x580-1.jpg");
+//            Thread downloadThread = new Thread(imageTask);
+//            downloadThread.start();
 
             //casgList.get(i).
 
@@ -123,20 +125,22 @@ public class MyAdapter extends BaseAdapter {
             holder = (WishViewHolder) convertView.getTag();
 
         }
-        DownloadContent.handler = new Handler()
-        {
-            @Override
-            public void handleMessage(@NonNull Message msg) {
-                Log.d(TAG, "----------image received from thread------------");
-                Bundle data = msg.getData();
-                Bitmap image = data.getParcelable("image");
-                holder.img.setImageBitmap(image);
-            }
-        };
+//        DownloadContent.handler = new Handler()
+//        {
+//            @Override
+//            public void handleMessage(@NonNull Message msg) {
+//                Log.d(TAG, "----------image received from thread------------");
+//                Bundle data = msg.getData();
+//                Bitmap image = data.getParcelable("image");
+//                holder.img.setImageBitmap(image);
+//            }
+//        };
 
         Wish wish = wishList.get(getItemId(position));
         holder.name.setText(wish.getName());
         holder.atributes.setText(wish.getAtributes());
+        holder.img.setImageBitmap(this.image);
+
 //        holder.filtered.setChecked(checkedHolder[position]);
 //        holder.filtered.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //            @Override

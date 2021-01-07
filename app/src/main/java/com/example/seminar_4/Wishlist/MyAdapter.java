@@ -1,6 +1,7 @@
 package com.example.seminar_4.Wishlist;
 
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -74,8 +75,6 @@ public class MyAdapter extends BaseAdapter {
         public ImageView img;
         private static final String TAG = MyAdapter.class.getSimpleName();
 
-
-
     }
 
 //    public boolean getChecked(){
@@ -92,56 +91,18 @@ public class MyAdapter extends BaseAdapter {
             holder.progressBar=convertView.findViewById(R.id.progressBar);
             holder.atributes = convertView.findViewById(R.id.tvAtributes);
             holder.name = convertView.findViewById(R.id.tvName);
-//            holder.filtered=convertView.findViewById(R.id.checkBox);
-//            holder.population = convertView.findViewById(R.id.tvPopulation);
-//holder.progressBar.setProgress(5);
+
             holder.img = convertView.findViewById(R.id.imageView);
-
-//            Log.d(TAG, "----------downloadImage method------------");
-//            DownloadContent imageTask = new DownloadContent("https://didmdw8v48h5q.cloudfront.net/wp-content/uploads/2019/12/New-York-Study-915x580-1.jpg");
-//            Thread downloadThread = new Thread(imageTask);
-//            downloadThread.start();
-
-            //casgList.get(i).
-
-//            DownloadContent.handler = new Handler()
-//            {
-//                @Override
-//                public void handleMessage(@NonNull Message msg) {
-//                    Log.d(TAG, "----------image received from thread------------");
-//                    Bundle data = msg.getData();
-//                    Bitmap image = data.getParcelable("image");
-//                    holder.img.setImageBitmap(image);
-//                }
-//            };
-
-
-//        Log.d(TAG, "----------downloadImage method------------");
-//            DownloadContent imageTask = new DownloadContent("https://didmdw8v48h5q.cloudfront.net/wp-content/uploads/2019/12/New-York-Study-915x580-1.jpg");
-//            Thread downloadThread = new Thread(imageTask);
-//            downloadThread.start();
-
             convertView.setTag(holder);
-
-
         }
         else
-        {
-
             holder = (WishViewHolder) convertView.getTag();
 
-        }
-//        DownloadContent.handler = new Handler()
-//        {
-//            @Override
-//            public void handleMessage(@NonNull Message msg) {
-//                Log.d(TAG, "----------image received from thread------------");
-//                Bundle data = msg.getData();
-//                Bitmap image = data.getParcelable("image");
-//                holder.img.setImageBitmap(image);
-//            }
-//        };
-        holder.progressBar.setProgress(5);
+        ObjectAnimator progressAnimator;
+        progressAnimator = ObjectAnimator.ofInt(holder.progressBar, "progress", 0,10);
+        progressAnimator.setDuration(2000);
+        progressAnimator.start();
+        //holder.progressBar.setProgress(5);
 
         Wish wish = wishList.get(getItemId(position));
         holder.name.setText(wish.getName());

@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.seminar_4.Cash.DownloadContent;
@@ -42,6 +43,7 @@ public class MainActivityWishlist extends AppCompatActivity  {
     private ListView lvWishes;
     private GridView gvWishes;
     private  ArrayList<Image> bitmapArrayList=new ArrayList<>();
+    private ProgressBar progressBar;
     private static final String TAG = MainActivityWishlist.class.getSimpleName() ;
 
 
@@ -57,7 +59,10 @@ public class MainActivityWishlist extends AppCompatActivity  {
         Wish wish1= new Wish(1,"https://www.autocar.co.uk/sites/autocar.co.uk/files/images/car-reviews/first-drives/legacy/large-2479-s-classsaloon.jpg","Car",5, date,3000,"weekly","Material Good");
         Wish wish2= new Wish(2,"https://didmdw8v48h5q.cloudfront.net/wp-content/uploads/2019/12/New-York-Study-915x580-1.jpg","Trip to USA",3, date,12000,"weekly","Experience");
 
-
+         progressBar= findViewById(R.id.progressBar);
+//        progressBar.setMax(10);
+//        int max=10;
+//        progressBar.setProgress(2);
 
         Map<Long, Wish> wishMap = new HashMap<>();
         wishMap.put(wish1.getId(),wish1);
@@ -90,6 +95,8 @@ public class MainActivityWishlist extends AppCompatActivity  {
                         addLvWishesAdapter(wishMap);
 
                 System.out.println("aaaaaaaaa"+bitmapArrayList.get(0).toString());
+//                progressBar.setProgress(10);
+
             }
         };
 
@@ -156,6 +163,8 @@ wishMap.forEach((id,wish1)->{
         e.printStackTrace();
     }
 });
+
+
 //            jsonObject.put("url",wish1.getUrl());
 //            jsonObject.put("name",wish1.getName());
 //            jsonObject.put("importance",wish1.getImportance());
@@ -201,7 +210,9 @@ wishMap.forEach((id,wish1)->{
 //        }
 //
         MyAdapter customAdapter = new MyAdapter(this, wishMap,this.bitmapArrayList);
+//        progressBar.setProgress(10);
         gvWishes.setAdapter(customAdapter);
+
 //        customAdapter.
 
     }

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,6 +41,7 @@ public class MyAdapter extends BaseAdapter {
         this.context = context;
         this.images=images;
         this.layoutInflater = LayoutInflater.from(context);
+
         createCheckedHolder();
 
     }
@@ -68,6 +70,7 @@ public class MyAdapter extends BaseAdapter {
         public TextView name;
         public TextView atributes;
         public CheckBox filtered;
+        public ProgressBar progressBar;
         public ImageView img;
         private static final String TAG = MyAdapter.class.getSimpleName();
 
@@ -86,11 +89,12 @@ public class MyAdapter extends BaseAdapter {
         {
             convertView = layoutInflater.inflate(R.layout.my_layout, parent, false);
             holder = new WishViewHolder();
+            holder.progressBar=convertView.findViewById(R.id.progressBar);
             holder.atributes = convertView.findViewById(R.id.tvAtributes);
             holder.name = convertView.findViewById(R.id.tvName);
 //            holder.filtered=convertView.findViewById(R.id.checkBox);
 //            holder.population = convertView.findViewById(R.id.tvPopulation);
-
+//holder.progressBar.setProgress(5);
             holder.img = convertView.findViewById(R.id.imageView);
 
 //            Log.d(TAG, "----------downloadImage method------------");
@@ -137,6 +141,7 @@ public class MyAdapter extends BaseAdapter {
 //                holder.img.setImageBitmap(image);
 //            }
 //        };
+        holder.progressBar.setProgress(5);
 
         Wish wish = wishList.get(getItemId(position));
         holder.name.setText(wish.getName());
@@ -149,6 +154,7 @@ public class MyAdapter extends BaseAdapter {
 
             }
         }
+        holder.progressBar.setProgress(10);
 //        holder.img.setImageBitmap(this.images.get((int) getItemId(position)-1));
 //        else
 //            holder.img.setImageBitmap(this.images.get(1));

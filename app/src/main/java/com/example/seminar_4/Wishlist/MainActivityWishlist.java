@@ -244,6 +244,7 @@ wishMap.forEach((id,wish1)->{
                 Toast.makeText(getApplicationContext(),"Wish was added succesfully",Toast.LENGTH_LONG).show();
                 wishList.add(wish);
                 ArrayAdapter adapter=(ArrayAdapter)lvWishes.getAdapter();
+                adapter.notifyDataSetChanged();
             }
         }
     }

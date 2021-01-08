@@ -6,9 +6,12 @@ import androidx.preference.PreferenceManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -51,6 +54,8 @@ public class MainMenuActivity extends AppCompatActivity {
     private CheckBox box;
     private ListView listView;
     private TextView tvStart;
+    private TextView tvDesc;
+    private WebView webView;
     //private ImageView img;
 
     @Override
@@ -64,6 +69,10 @@ public class MainMenuActivity extends AppCompatActivity {
                 .getDefaultSharedPreferences(this);
         tvStart.setText("Welcome to CashApp, "+preferences.getString("signature", ""));
 
+        webView = findViewById(R.id.webview);
+        //webView.setBackgroundColor(this.getColor());
+        webView.loadUrl("file:///android_asset/piggy.gif");
+
         //makeTransactions();
         //String s = makeJSONFile();
 
@@ -76,7 +85,8 @@ public class MainMenuActivity extends AppCompatActivity {
         final CashDBHelper databaseHelper = new CashDBHelper(this);
         //databaseHelper.insertSample();
 
-        final Cursor cursor = databaseHelper.getDataCursor();
+        //---------------------------Cash in Database
+        /*final Cursor cursor = databaseHelper.getDataCursor();
         final SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this,
                 android.R.layout.simple_list_item_2,
                 cursor,
@@ -94,7 +104,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 cursorAdapter.swapCursor(databaseHelper.getDataCursor());
                 cursorAdapter.notifyDataSetChanged();
             }
-        });
+        });*/
 
         btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,12 +163,17 @@ public class MainMenuActivity extends AppCompatActivity {
     {
         spnMenu = findViewById(R.id.spinner);
         btnOK = findViewById(R.id.button);
-        gridView = findViewById(R.id.dgv);
+        //gridView = findViewById(R.id.dgv);
         btnDelete = findViewById(R.id.button2);
         listView = findViewById(R.id.lv);
         //img = findViewById(R.id.imageView);
         btnSettings = findViewById(R.id.btnSettings);
         tvStart = findViewById(R.id.edtStart);
+        tvDesc = findViewById(R.id.tvDescription);
+        String description = "CashApp is a free financial manager and tracker for daily use.";
+        tvDesc.setText(description);
+        tvDesc.setTypeface(null, Typeface.BOLD);
+
     }
 
     /*public void downloadImage(String s) {

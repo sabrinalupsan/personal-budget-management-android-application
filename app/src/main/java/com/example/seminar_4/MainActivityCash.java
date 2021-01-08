@@ -73,6 +73,11 @@ public class MainActivityCash extends AppCompatActivity {
 
         InitializeAllComponents();
 
+        SharedPreferences preferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        int maxAmount = preferences.getInt("seekBar", 100);
+        amount.setMax(maxAmount);
+
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,6 +89,13 @@ public class MainActivityCash extends AppCompatActivity {
                     img.animate().alpha(100f).setDuration(10);
             }
 
+        });
+
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                date.setText(" ");
+            }
         });
 
         OKbutton.setOnClickListener(new View.OnClickListener() {
@@ -213,7 +225,6 @@ public class MainActivityCash extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-
             float theRating = rating.getRating();
 
             boolean isPlanned;
@@ -224,7 +235,6 @@ public class MainActivityCash extends AppCompatActivity {
             else
                 plannedValue = "No";
 
-
             boolean isFromSavings;
             isFromSavings = fromSavings.isChecked();
             String fromSavings = null;
@@ -233,8 +243,6 @@ public class MainActivityCash extends AppCompatActivity {
             else
                 fromSavings = "No";
             return new Cash(theType, theAmount, theDate, theRating, plannedValue, fromSavings);
-
-
     }
 
     @Override
@@ -245,27 +253,15 @@ public class MainActivityCash extends AppCompatActivity {
             assert data != null;
             Bundle bundle = data.getExtras();
             ArrayList<Cash> transactions2 = bundle.getParcelableArrayList(TRANSACTIONS);
-            for(int i=0; i<transactions2.size(); i++) {
+            for(int i=0; i<transactions2.size(); i++)
                 transactions.add(transactions2.get(i));
-            }
             clearAllComponents();
             makeFILE();
 
         }
         else
-        {
             if(resultCode == 1)
-            {
                 clearAllComponents();
-                //ArrayList<Cash> newTransactions;
-                //newTransactions = data.getParcelableArrayListExtra(CashActivity.TRANSACTIONS);
-                //if(cash!=null)
-                //{
-                //   for(int i=0; i<newTransactions.size(); i++)
-                //        transactions.add(newTransactions.get(i));
-                //}
-            }
-        }
     }
 
     public File makeFILE()

@@ -22,7 +22,7 @@
 
         <SeekBarPreference
             android:defaultValue="22"
-            android:title="@string/max_cash"
+            android:title="@string/cashAmountMaximum"
             android:key="seekBar"
             app:showSeekBarValue="true"
             android:max="1000"/>

@@ -82,15 +82,7 @@ public class EditFragment extends Fragment {
                     }
                     barEntryArrayList.add(new BarEntry(x, y));
                     labels.add(type);
-                    //entryList.add(new Entry(x, y));
                 }
-
-                /*LineDataSet lineDataSet = new LineDataSet(entryList, "transactions");
-                lineDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
-                lineDataSet.setFillAlpha(110);
-                lineData = new LineData(lineDataSet);
-                lineChart.setData(lineData);
-                lineChart.invalidate();*/
             }
             else
             {
@@ -102,15 +94,6 @@ public class EditFragment extends Fragment {
                 e.setIcon(dr);
                 barEntryArrayList.add(e);
                 labels.add(type);
-
-                /*entryList.add(new Entry(x, y));
-                LineDataSet lineDataSet = new LineDataSet(entryList, "transactions");
-                lineDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
-                lineDataSet.setFillAlpha(110);
-                lineData = new LineData(lineDataSet);
-                lineChart.setData(lineData);
-                lineChart.setVisibleXRangeMaximum(10);
-                lineChart.invalidate();*/
             }
             BarDataSet bardataset = new BarDataSet(barEntryArrayList, "Transactions");
             BarData data = new BarData(bardataset);

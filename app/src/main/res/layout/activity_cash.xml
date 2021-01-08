@@ -10,11 +10,15 @@
     <TextView
         android:id="@+id/editTextTextPersonName3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="42dp"
         android:ems="10"
+        android:fontFamily="cursive"
+        android:gravity="center"
         android:inputType="textPersonName"
         android:text="@string/is_this_information_correct"
-        android:textSize="24sp" />
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="30sp"
+         />
 
     <TextView
         android:id="@+id/infoID"
@@ -51,7 +55,7 @@
         android:id="@+id/fragment"
         android:name="com.example.seminar_4.Cash.ListFragment"
         android:layout_width="match_parent"
-        android:layout_height="313dp" />
+        android:layout_height="331dp" />
 
     <Button
         android:id="@+id/btnChart"

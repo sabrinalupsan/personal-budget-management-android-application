@@ -12,23 +12,21 @@
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/imageFilterView"
         android:layout_width="match_parent"
-        android:layout_height="49dp"
+        android:layout_height="40dp"
         app:srcCompat="@drawable/untitled_1"
         tools:ignore="VectorDrawableCompat" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:text="@string/examples" />
 
     <GridView
         android:id="@+id/gvWishes"
         android:layout_width="match_parent"
         android:layout_height="270dp"
-        android:numColumns="2"
-
-        >
+        android:numColumns="2">
 
     </GridView>
 
@@ -38,7 +36,12 @@
         android:layout_height="wrap_content"
         android:onClick="startAddWish"
         android:text="@string/add" />
-
+    <Button
+        android:id="@+id/buttonCancelWish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="startAddWish"
+        android:text="@string/btnCancelWishList" />
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="299dp"

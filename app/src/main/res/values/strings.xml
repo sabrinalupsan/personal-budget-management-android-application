@@ -147,4 +147,7 @@
     <string name="drop">Drop</string>
     <string name="save_text_file">Save Text File</string>
     <string name="drop_table">Drop table</string>
+    <string name="choose_rating">Choose Rating</string>
+    <string name="examples">Examples</string>
+    <string name="todo">TODO</string>
 </resources>

@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="10dp"
-        android:text="@string/bank_name" />
+        android:text="@string/bank_namee" />
 
     <Spinner
         android:id="@+id/spn_bankName"
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="10dp"
-        android:text="@string/iban" />
+        android:text="@string/ibann" />
 
 
     <EditText
@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="10dp"
-        android:text="@string/limit" />
+        android:text="@string/limitt" />
 
 
     <EditText
@@ -111,7 +111,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="3">
+        android:weightSum="2">
 
         <Button
             android:id="@+id/btn_saveCSV"
@@ -120,14 +120,8 @@
             android:layout_marginLeft="30dp"
             android:layout_weight="1"
             android:onClick="SaveFileCSV"
-            android:text="@string/save_csv" />
+            android:text="@string/save_txt" />
 
-        <Button
-            android:id="@+id/btn_dropAccount"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/drop" />
 
         <Button
             android:id="@+id/btn_deleteAccount"

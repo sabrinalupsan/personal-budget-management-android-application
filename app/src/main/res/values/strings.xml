@@ -150,4 +150,12 @@
     <string name="choose_rating">Choose Rating</string>
     <string name="examples">Examples</string>
     <string name="todo">TODO</string>
+    <string name="bank_namee">Bank Name*</string>
+    <string name="ibann">IBAN*</string>
+    <string name="limitt">Limit*</string>
+    <string name="actual_amountt">Actual Amount*</string>
+    <string name="type_of_summ">Type of sum*</string>
+    <string name="categoryy">Category*</string>
+    <string name="date_of_transactionn">Date of transaction*</string>
+    <string name="save_txt">Save txt</string>
 </resources>

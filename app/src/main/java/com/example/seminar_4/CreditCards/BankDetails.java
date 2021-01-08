@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,15 +32,16 @@ public class BankDetails extends AppCompatActivity {
     private static final String TAG = BankDetails.class.getSimpleName();
     private Spinner spn;
     private Button btn_cancel;
-    private Button btn_ok;
+    private Button btn_ok, btn_delete;
     private ListView listView;
-
+    private Cursor cursor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bank_details);
 
         listView = findViewById(R.id.lv_banks);
+        btn_delete = findViewById(R.id.btn_deleteAccount);
 //        btn_drop = findViewById(R.id.btn_dropAccount);
 //
 //        btn_drop.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +55,7 @@ public class BankDetails extends AppCompatActivity {
         final AccountDBHelper accountDBHelper = new AccountDBHelper(this);
 
 
-        final Cursor cursor = accountDBHelper.getDataCursorAccount();
+        cursor = accountDBHelper.getDataCursorAccount();
         final SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this,
                 android.R.layout.simple_list_item_2,
                 cursor,
@@ -91,14 +94,22 @@ public class BankDetails extends AppCompatActivity {
                 EditText etLimit = findViewById(R.id.et_limit);
                 spn = findViewById(R.id.spn_bankName);
 
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("paramIBAN", etIBAN.getText().toString());
-                bundle.putString("paramLimit", etLimit.getText().toString());
-                intent.putExtras(bundle);
+                if( TextUtils.isEmpty(etIBAN.getText())) {
+                    etIBAN.setError("IBAN is required!");
+                }
+                else if(TextUtils.isEmpty(etLimit.getText())){
+                    etLimit.setError("Limit is required!");
+                }
+                else {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("paramIBAN", etIBAN.getText().toString());
+                    bundle.putString("paramLimit", etLimit.getText().toString());
+                    intent.putExtras(bundle);
 
-                accountDBHelper.insertSampleAccount(etIBAN.getText().toString(), spn.getSelectedItem().toString(), etLimit.getText().toString());
-                startActivity(intent);
+                    accountDBHelper.insertSampleAccount(etIBAN.getText().toString(), spn.getSelectedItem().toString(), etLimit.getText().toString());
+                    startActivity(intent);
+                }
             }
         });
 
@@ -121,16 +132,50 @@ public class BankDetails extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+        listView.setOnItemLongClickListener (new AdapterView.OnItemLongClickListener() {
+            public boolean onItemLongClick(AdapterView parent, View view, int position, long id) {
+                TextView txtValue = view.findViewById(android.R.id.text1);
+                String iban = txtValue.getText().toString();
+                accountDBHelper.deleteItemAccount(iban);
+                cursorAdapter.swapCursor(accountDBHelper.getDataCursorAccount());
+                cursorAdapter.notifyDataSetChanged();
+                return true;
+            }
+        });
+
+        btn_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                accountDBHelper.deleteAllAccount();
+                cursorAdapter.swapCursor(accountDBHelper.getDataCursorAccount());
+                cursorAdapter.notifyDataSetChanged();
+            }
+        });
     }
+
 
     public String GetTextFromList()
     {
         String value = "";
-        //for(int i=0;i<listView.getCount();i++)
-            value = value + listView.getItemAtPosition(0).toString();
+        final AccountDBHelper accountDBHelper = new AccountDBHelper(this);
+        Cursor cursor = accountDBHelper.getDataCursorAccount();
 
+        if (cursor.getCount() != 0) {
+            if (cursor.moveToFirst()) {
+                do {
+                    String iban = cursor.getString(cursor.getColumnIndex("_id"));
+                    String amount = cursor.getString(cursor.getColumnIndex("AmountLimit"));
+                    String bank = cursor.getString(cursor.getColumnIndex("Bank"));
+
+                    value = value + "IBAN: " + iban + ", BANK: " + bank + ", LIMIT: " + amount + "\n";
+                } while (cursor.moveToNext());
+            }
+        }
         return value;
     }
+
 
     public void SaveFileCSV(View view){
         writeToFile(GetTextFromList());

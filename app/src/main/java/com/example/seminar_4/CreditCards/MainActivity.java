@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
@@ -20,8 +21,6 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private TextView date_text;
-    private SeekBar seekbar;
-    private TextView tv_SeekBarValue;
     private TextView tv;
     private String sIBAN, sLimit;
 
@@ -43,83 +42,66 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    @Override
-//    protected void onStart()
-//    {
-//        // TODO Auto-generated method stub
-//        super.onStart();
-//       // Progress(findViewById(R.id.tv_seekBarValue));
-//    }
-//
-//
-//    @Override
-//    protected void onResume()
-//    {
-//        // TODO Auto-generated method stub
-//        super.onResume();
-//        //Progress(findViewById(R.id.tv_seekBarValue));
-//    }
-//
-//
-//
-//    public void Progress(View view)
-//    {
-//        seekbar = (SeekBar)findViewById(R.id.sb_limit);
-//        tv_SeekBarValue = findViewById(R.id.tv_seekBarValue);
-//        seekbar.setMax(Integer.parseInt(sLimit));
-//        tv_SeekBarValue.setText(seekbar.getProgress() + "/" + seekbar.getMax());
-//
-//        seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-//            @Override
-//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//                tv_SeekBarValue.setText(seekbar.getProgress() + "/" + sLimit);
-//            }
-//
-//            @Override
-//            public void onStartTrackingTouch(SeekBar seekBar) {
-//                tv_SeekBarValue.setText(seekbar.getProgress() + "/" + sLimit);
-//            }
-//
-//            @Override
-//            public void onStopTrackingTouch(SeekBar seekBar) {
-//                tv_SeekBarValue.setText(seekbar.getProgress() + "/" + sLimit);
-//
-//            }
-//        });
-//    }
 
     public void callSecondActivity(View view)
     {
-        Intent intent = new Intent(this, CreditCards_2.class);
-        Bundle bundle = new Bundle();
-
-        // startActivity(intent);
-        bundle.putString("param2", sIBAN);
-
         TextView value2 = (TextView)findViewById(R.id.et_actualAmount);
-        bundle.putString("param3", value2.getText().toString());
-
         RadioGroup radiogroup = findViewById(R.id.rg_typeSum);
-        String selectedButton = ((RadioButton)findViewById(radiogroup.getCheckedRadioButtonId())).getText().toString();
-        bundle.putString("param4", selectedButton);
 
         ArrayList<String> array = new ArrayList<String>();
-        if(((CheckBox)findViewById(R.id.checkBox)).isChecked() == true)
-            array.add(((CheckBox)findViewById(R.id.checkBox)).getText().toString());
-        if(((CheckBox)findViewById(R.id.checkBox2)).isChecked() == true)
-            array.add(((CheckBox)findViewById(R.id.checkBox2)).getText().toString());
-        if (((CheckBox)findViewById(R.id.checkBox3)).isChecked() == true)
-            array.add(((CheckBox)findViewById(R.id.checkBox3)).getText().toString());
+        CheckBox c1 = (CheckBox)findViewById(R.id.checkBox);
+        CheckBox c2 = (CheckBox)findViewById(R.id.checkBox2);
+        CheckBox c3 = (CheckBox)findViewById(R.id.checkBox3);
 
-        bundle.putStringArrayList("param5", array);
+        if(c1.isChecked() == true)
+            array.add(c1.getText().toString());
+        if(c2.isChecked() == true)
+            array.add(c2.getText().toString());
+        if (c3.isChecked() == true)
+            array.add(c3.getText().toString());
 
         date_text = (TextView)findViewById(R.id.tv_DatePlace);
-        bundle.putString("param9", date_text.getText().toString());
 
-        intent.putExtras(bundle);
-        //intent.addFlags(intent.FLAG_ACTIVITY_FORWARD_RESULT);
+        if( TextUtils.isEmpty(value2.getText()))
+            value2.setError("Actual Amount is required!");
+        else if (radiogroup.getCheckedRadioButtonId() == -1)
+            Toast.makeText(this, "A type of sum is required", Toast.LENGTH_SHORT).show();
+        else if( c1.isChecked() == false && c2.isChecked() == false && c3.isChecked() == false)
+            Toast.makeText(this, "A category is required", Toast.LENGTH_SHORT).show();
+        else if(TextUtils.isEmpty(date_text.getText()))
+            date_text.setError("A date is required!");
+        else if(Integer.parseInt(value2.getText().toString()) > Integer.parseInt(sLimit) &&
+                ((RadioButton)findViewById(radiogroup.getCheckedRadioButtonId())).getText().toString() == "Expense"){
+            Toast.makeText(this, "The transaction cannot be completed", Toast.LENGTH_SHORT).show();
+            value2.setError("The Actual Amount is higher than the Account Limit: " + sLimit);
+        }
 
-        startActivityForResult(intent, 100);
+
+        else {
+            String selectedButton = ((RadioButton)findViewById(radiogroup.getCheckedRadioButtonId())).getText().toString();
+            Intent intent = new Intent(this, CreditCards_2.class);
+            Bundle bundle = new Bundle();
+
+            // startActivity(intent);
+            bundle.putString("param2", sIBAN);
+
+
+            bundle.putString("param3", value2.getText().toString());
+
+
+            bundle.putString("param4", selectedButton);
+
+
+            bundle.putStringArrayList("param5", array);
+
+
+            bundle.putString("param9", date_text.getText().toString());
+
+            intent.putExtras(bundle);
+            //intent.addFlags(intent.FLAG_ACTIVITY_FORWARD_RESULT);
+
+            startActivityForResult(intent, 100);
+        }
     }
 
 
@@ -128,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(this, calendar_activity.class);
         Bundle bundle = new Bundle();
-        bundle.putString("param7", "Data received from MainActivity!");
 
         intent.putExtras(bundle);
         startActivityForResult(intent, 200);

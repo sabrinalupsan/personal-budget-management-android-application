@@ -6,10 +6,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.seminar_4.R;
 
 import java.io.IOException;
@@ -20,15 +23,19 @@ import java.util.ArrayList;
 public class RegistrationList extends AppCompatActivity {
     private static final String TAG = RegistrationList.class.getSimpleName();
     private TextView list;
-    private String iban;
-   // private Button btn_drop;
+    private String iban, amount, type;
+    private Button btn_delete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_list);
-        list = findViewById(R.id.tv_transactions);
 
+
+
+
+        list = findViewById(R.id.tv_transactions);
+        btn_delete = findViewById(R.id.btn_deleteAllTransactions);
 //        btn_drop = findViewById(R.id.btn_dropTransaction);
 //        btn_drop.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -47,9 +54,14 @@ public class RegistrationList extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        iban = extras.getString("paramIBAN");
+        try {
+            iban = extras.getString("paramIBAN");
+            type = extras.getString("paramType");
+            amount = extras.getString("paramAmount");
+        }catch(Exception e){
+        }
 
-        AccountDBHelper accountDBHelper = new AccountDBHelper(this);
+        final AccountDBHelper accountDBHelper = new AccountDBHelper(this);
 
         for(int i=0;i<TransactionTable.TABLE_TODO.length();i++) {
             Cursor cursor = accountDBHelper.getDataCursorTransaction(i);
@@ -66,16 +78,32 @@ public class RegistrationList extends AppCompatActivity {
                 cursor.close();
                 CreditEntry entry = new CreditEntry(iban, amount, type, category, date);
 
-                list.setText(list.getText().toString() + "\n" + entry.toString() + " / " + limit + ", Bank: " + bank);
+                list.setText(list.getText().toString() + "\n" + entry.toString() + ", Current Amount " + limit + ", Bank: " + bank);
             }
         }
 
+        int value;
+        try {
+            if(type == "Income")
+                value = (Integer.parseInt(accountDBHelper.getLimit(iban)) + Integer.parseInt(amount));
+            else
+                value = (Integer.parseInt(accountDBHelper.getLimit(iban)) - Integer.parseInt(amount));
+            accountDBHelper.updateAccount(iban, value);
+        }catch(Exception e){}
 
+
+        btn_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                accountDBHelper.deleteAllTransactions();
+                list.setText("");
+
+            }
+        });
     }
 
     public void returnToMainActivityFromList(View view) {
         Intent intent = new Intent(this, BankDetails.class);
-        Bundle bundle = new Bundle();
         startActivity(intent);
     }
 

@@ -109,10 +109,32 @@ public class AccountDBHelper extends SQLiteOpenHelper {
         Log.d("DatabaseOperation", value.toString());
     }
 
-    public void deleteItemById(String value) {
+    public void updateAccount(String iban, int value) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(AccountTable.COLUMN_LIMIT, value);
+        String whereClause = AccountTable.COLUMN_IBAN+ "=?";
+        String whereArgs[] = {iban};
+        db.update(AccountTable.TABLE_TODO, contentValues, whereClause, whereArgs);
+    }
+
+    public void deleteItemAccount(String iban) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] args = new String[]{value};
+        String[] args = new String[]{iban};
         int result = db.delete(AccountTable.TABLE_TODO," _id=?", args);
         Log.d("DatabaseOperation", "Deleted value: " + result);
+    }
+
+
+    public void deleteAllAccount(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + AccountTable.TABLE_TODO);
+        db.close();
+    }
+
+    public void deleteAllTransactions(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + TransactionTable.TABLE_TODO);
+        db.close();
     }
 }

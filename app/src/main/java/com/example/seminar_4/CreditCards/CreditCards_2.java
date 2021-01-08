@@ -20,7 +20,6 @@ public class CreditCards_2 extends AppCompatActivity {
     private TextView category;
     private TextView date;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +38,6 @@ public class CreditCards_2 extends AppCompatActivity {
 
 
         iban = param2;
-        Toast.makeText(this, iban, Toast.LENGTH_LONG).show();
         amount = (TextView)findViewById(R.id.tv_amountCorrect);
         amount.setText(param3);
 
@@ -57,6 +55,9 @@ public class CreditCards_2 extends AppCompatActivity {
 
         date = (TextView)findViewById(R.id.tv_dateCorrect);
         date.setText(param9);
+
+
+
         }
 
 
@@ -79,7 +80,10 @@ public class CreditCards_2 extends AppCompatActivity {
         accountDBHelper.insertSampleTransaction(creditEntry.getIban(), creditEntry.getAmount(), creditEntry.getType(),
                 creditEntry.getCategory(), creditEntry.getDate());
 
+
         extras.putString("paramIBAN", creditEntry.getIban());
+        extras.putString("paramType", creditEntry.getType());
+        extras.putString("paramAmount", creditEntry.getAmount());
         intent.putExtras(extras);
         startActivity(intent);
     }

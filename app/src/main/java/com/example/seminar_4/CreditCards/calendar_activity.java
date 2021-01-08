@@ -27,7 +27,6 @@ public class calendar_activity extends AppCompatActivity {
         setContentView(R.layout.activity_calendar_activity);
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        String param7 = extras.getString("param7");
 
         calendar = (CalendarView)findViewById(R.id.cv_calendar);
         DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
@@ -39,8 +38,6 @@ public class calendar_activity extends AppCompatActivity {
                 date = dayOfMonth + "-"+ (month+1) + '-' + year;
             }
         });
-
-        Toast.makeText(this, param7, Toast.LENGTH_LONG).show();
 
     }
 

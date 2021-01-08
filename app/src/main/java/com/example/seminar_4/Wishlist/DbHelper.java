@@ -84,7 +84,7 @@ public class DbHelper extends SQLiteOpenHelper {
             cv.put(WishTable.COLUMN_NAME, c.getName());
             cv.put(WishTable.COLUMN_DEADLINE, c.getDeadline().toString());
             cv.put(WishTable.COLUMN_IMPORTANCE, c.getImportance());
-            cv.put(WishTable.COLUMN_CATEGORY, c.getImportance());
+            cv.put(WishTable.COLUMN_CATEGORY, c.getCategory());
             cv.put(WishTable.COLUMN_ALERT, c.getAlert());
 
             cv.put(WishTable.COLUMN_COST, c.getCost());

@@ -6,6 +6,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 import com.example.seminar_4.Cash.DownloadContent;
@@ -28,6 +30,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -45,6 +50,7 @@ public class MainActivityWishlist extends AppCompatActivity  {
     private  ArrayList<Image> bitmapArrayList=new ArrayList<>();
     private ProgressBar progressBar;
     private static final String TAG = MainActivityWishlist.class.getSimpleName() ;
+    private DbHelper databaseHelper;
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -56,8 +62,38 @@ public class MainActivityWishlist extends AppCompatActivity  {
         init();
 
         Date date=new Date();
+//        SimpleDateFormat formater=new SimpleDateFormat("dd/MM/yyyy");
+//        Date date = null;
+//        try {
+//            date = formater.parse(String.valueOf(dateS));
+//
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+
         Wish wish1= new Wish(1,"https://www.autocar.co.uk/sites/autocar.co.uk/files/images/car-reviews/first-drives/legacy/large-2479-s-classsaloon.jpg","Car",5, date,3000,"weekly","Material Good");
         Wish wish2= new Wish(2,"https://didmdw8v48h5q.cloudfront.net/wp-content/uploads/2019/12/New-York-Study-915x580-1.jpg","Trip to USA",3, date,12000,"weekly","Experience");
+
+        this.databaseHelper = new DbHelper(this);
+
+//        databaseHelper.insertWish(wish1);
+        try {
+            wishList=databaseHelper.selectAll();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        ArrayAdapter<Wish> adapter= new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, //aici bag layout ul facut de mn
+                wishList);
+        lvWishes.setAdapter(adapter);
+
+//        final Cursor cursor = databaseHelper.getDataCursor();
+//        final SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
+//                android.R.layout.simple_list_item_1,
+//                cursor,
+//                new String[]{ "name","cost","importance","category"},
+//                new int[]{android.R.id.text1, android.R.id.text2});
+//        lvWishes.setAdapter(adapter);
+
 
          progressBar= findViewById(R.id.progressBar);
 //        progressBar.setMax(10);
@@ -136,9 +172,9 @@ public class MainActivityWishlist extends AppCompatActivity  {
     private void addLvWishesAdapter(Map<Long, Wish> wishMap) {
         if(this.bitmapArrayList.size()<wishMap.size())
         {return;}
-        ArrayAdapter<Wish> adapter= new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, //aici bag layout ul facut de mn
-                wishList);
-        lvWishes.setAdapter(adapter);
+//        ArrayAdapter<Wish> adapter= new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, //aici bag layout ul facut de mn
+//                wishList);
+//        lvWishes.setAdapter(adapter);
 
 
         JSONArray jsonArray= new JSONArray();
@@ -243,6 +279,9 @@ wishMap.forEach((id,wish1)->{
             if(wish!=null){
                 Toast.makeText(getApplicationContext(),"Wish was added succesfully",Toast.LENGTH_LONG).show();
                 wishList.add(wish);
+                        databaseHelper.insertWish(wish);
+
+
                 ArrayAdapter adapter=(ArrayAdapter)lvWishes.getAdapter();
                 adapter.notifyDataSetChanged();
             }

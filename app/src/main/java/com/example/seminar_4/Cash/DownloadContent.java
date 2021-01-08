@@ -6,6 +6,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import com.example.seminar_4.model.Image;
+import com.example.seminar_4.model.Wish;
+
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -17,9 +20,11 @@ public class DownloadContent implements Runnable {
 
     private static final String TAG = DownloadContent.class.getSimpleName();
     String url;
+    String category;
     public static Handler handler;
-    public DownloadContent(String url) {
-        this.url = url;
+    public DownloadContent(Wish wish) {
+        this.url = wish.getUrl();
+        this.category=wish.getCategory();
     }
 
     @Override
@@ -40,7 +45,10 @@ public class DownloadContent implements Runnable {
                     Bitmap bitmap = BitmapFactory.decodeStream(is);
                     Message message = handler.obtainMessage();
                     Bundle bundle = new Bundle();
+//                    Image img=new Image(bitmap,this.category);
                     bundle.putParcelable("image", bitmap);
+                    bundle.putString("category", this.category);
+
                     message.setData(bundle);
                     handler.sendMessage(message);
                     Log.d(TAG, "----------download finished with success------------");

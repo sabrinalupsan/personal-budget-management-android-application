@@ -161,4 +161,6 @@
     <string name="cancel">Cancel</string>
     <string name="cancel11">Cancel</string>
     <string name="cashAmountMaximum">Maximum cash amount</string>
+    <string name="income_default">Default income</string>
+    <string name="default_expense_amount">Default expense amount</string>
 </resources>

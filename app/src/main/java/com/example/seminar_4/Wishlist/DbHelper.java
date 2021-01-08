@@ -79,7 +79,6 @@ public class DbHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-//            Calendar c = Calendar.getInstance();
             ContentValues cv = new ContentValues();
             cv.put(WishTable.COLUMN_NAME, c.getName());
             cv.put(WishTable.COLUMN_DEADLINE, c.getDeadline().toString());

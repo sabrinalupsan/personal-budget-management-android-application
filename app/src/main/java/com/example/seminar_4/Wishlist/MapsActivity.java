@@ -60,7 +60,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 return true;
             }
         });
-        // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
         LatLng borabora = new LatLng( -16, -151);
         LatLng madagascar = new LatLng(-19, 46);

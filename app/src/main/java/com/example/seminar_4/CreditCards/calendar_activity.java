@@ -38,9 +38,7 @@ public class calendar_activity extends AppCompatActivity {
                 date = dayOfMonth + "-"+ (month+1) + '-' + year;
             }
         });
-
     }
-
 
     public void returnToMainActivityFromCalendar(View view)
     {

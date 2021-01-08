@@ -85,26 +85,6 @@ public class MainMenuActivity extends AppCompatActivity {
         final CashDBHelper databaseHelper = new CashDBHelper(this);
         //databaseHelper.insertSample();
 
-        //---------------------------Cash in Database
-        /*final Cursor cursor = databaseHelper.getDataCursor();
-        final SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this,
-                android.R.layout.simple_list_item_2,
-                cursor,
-                new String[]{"_id", "type"},
-                new int[]{android.R.id.text1, android.R.id.text2});
-        listView.setAdapter(cursorAdapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView txtValue = view.findViewById(android.R.id.text1);
-                String value = txtValue.getText().toString();
-                Toast.makeText(getApplicationContext(), "Clicked on item: " + value, Toast.LENGTH_SHORT).show();
-                databaseHelper.deleteItemById(value);
-                cursorAdapter.swapCursor(databaseHelper.getDataCursor());
-                cursorAdapter.notifyDataSetChanged();
-            }
-        });*/
 
         btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -175,17 +155,6 @@ public class MainMenuActivity extends AppCompatActivity {
         tvDesc.setTypeface(null, Typeface.BOLD);
 
     }
-
-    /*public void downloadImage(String s) {
-        Log.d(TAG, "---------downloadImage method--------");
-        ArrayList<String> urls = new ArrayList<>();
-        urls.add("https://www.ci.brownsville.or.us/sites/default/files/styles/gallery500/public/imageattachments/utilities/page/541/light-water-phone-house-icons-by-david-castillo-dominici-freedigitalphotos_net_.jpg?itok=PAq7p0PS");
-        urls.add("https://insights.dice.com/wp-content/uploads/2018/01/Salary-Satisfaction-Dice.jpeg");
-        urls.add("https://www.enca.com/sites/default/files/LOTTO%20BALLS.jpg");
-        DownloadImage imageTask = new DownloadImage(urls[0]);
-        Thread downloadThread = new Thread(imageTask);
-        downloadThread.start();
-    }*/
 
     public File makeFILE()
     {

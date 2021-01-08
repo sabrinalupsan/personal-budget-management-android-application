@@ -41,15 +41,6 @@ public class BankDetails extends AppCompatActivity {
 
         listView = findViewById(R.id.lv_banks);
         btn_delete = findViewById(R.id.btn_deleteAccount);
-//        btn_drop = findViewById(R.id.btn_dropAccount);
-//
-//        btn_drop.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                final AccountDBHelper accountDBHelper = new AccountDBHelper(getApplicationContext());
-//                accountDBHelper.dropAccount();
-//            }
-//        });
 
         final AccountDBHelper accountDBHelper = new AccountDBHelper(this);
 

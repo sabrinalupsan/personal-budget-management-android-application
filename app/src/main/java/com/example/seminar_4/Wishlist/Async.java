@@ -26,7 +26,6 @@ public class Async extends AsyncTask<String,Void, String> {
 
         try {
             URL url = new URL(strings[0]);
-//            URL url = new URL(this.url);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             byte[] postData       = strings[1].getBytes( StandardCharsets.UTF_8 );
 
@@ -48,71 +47,15 @@ public class Async extends AsyncTask<String,Void, String> {
                         );
                 wr.write( postData );
                 wr.writeBytes("\\r\\n--*****--");
-
             }
-
 
             connection.connect();
             int responseCode = connection.getResponseCode();
             Log.d(TAG, String.valueOf(responseCode));
 
-//        return data;
-
-//            try(OutputStream os = connection.getOutputStream()) {
-//                byte[] input = strings[1].getBytes("utf-8");
-//                os.write(input, 0, input.length);
-//            }
-
-//            try(BufferedReader br = new BufferedReader(
-//                    new InputStreamReader(connection.getInputStream(), "utf-8"))) {
-//                StringBuilder response = new StringBuilder();
-//                String responseLine = null;
-//                while ((responseLine = br.readLine()) != null) {
-//                    response.append(responseLine.trim());
-//                }
-//                System.out.println(response.toString());
-//            }
-
-//            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
-//            writer.write(strings[1]);
-//            writer.close();
-
-//            connection.connect();
-
-            // Response: 400
-//            Log.e("Response", connection.getResponseMessage() + "");
-
-//            String result=null;
-//            URL url = new URL(strings[0]);
-//            URLConnection connection = url.openConnection();
-//            if(connection instanceof HttpURLConnection) {
-//                httpURLConnection = (HttpURLConnection) connection;
-//                httpURLConnection.connect();
-//                int resultCode = httpURLConnection.getResponseCode();
-//                if (resultCode == HTTP_OK) {
-//                    OutputStream os = httpURLConnection.getOutputStream();
-//
-//                    @SuppressLint({"NewApi", "LocalSuppress"}) OutputStreamWriter osw = new OutputStreamWriter(os, Charset.forName(StandardCharsets.UTF_8.name()));
-//                    StringBuilder textBuilder = new StringBuilder();
-//                    try (Writer writer = new BufferedWriter(osw)) {
-////                        int c = 0;
-////                        while ((c = writer.read()) != -1) {
-////                            textBuilder.append((char) c);
-////
-////                        }
-//                        writer.write(strings[1]);
-//                    }
-//                    result = textBuilder.toString();
-//                    publishProgress();
-//                    Log.d(TAG, "Content: " + textBuilder.toString());
-//                }
-//            }
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
         return null;
     }

@@ -27,13 +27,10 @@ public class IsCorrect extends AppCompatActivity {
         questionTv=findViewById(R.id.questionTv);
         questionTv.append("Add wish "+"'"+name+"'"+" with the importance "
                 +rating+"/5 "+"and cost "+cost+"$?");
-
-
     }
 
     public void cancelWish(View view){
         Intent intent= new Intent();
-//        String date = findViewById(R.id.calendarView);
         intent.putExtra("add","Canceled");
 
         setResult(RESULT_OK,intent);
@@ -42,7 +39,6 @@ public class IsCorrect extends AppCompatActivity {
 
     public void addWish(View view){
         Intent intent= new Intent();
-//        String date = findViewById(R.id.calendarView);
         intent.putExtra("add","Added");
 
         setResult(RESULT_OK,intent);

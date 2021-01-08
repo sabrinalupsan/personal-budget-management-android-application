@@ -96,9 +96,10 @@ public class AddWishActivity extends AppCompatActivity {
 
             Wish wish = new Wish(name, imp, date, wCost, alert, category);
 
-//        wish.setCost();
             return wish;
-        }catch(Exception e){
+        }
+        catch(Exception e)
+        {
             Toast.makeText(getApplicationContext(),"Incorrect info", Toast.LENGTH_LONG).show();
             return null;
         }

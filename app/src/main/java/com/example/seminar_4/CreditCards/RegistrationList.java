@@ -36,21 +36,6 @@ public class RegistrationList extends AppCompatActivity {
 
         list = findViewById(R.id.tv_transactions);
         btn_delete = findViewById(R.id.btn_deleteAllTransactions);
-//        btn_drop = findViewById(R.id.btn_dropTransaction);
-//        btn_drop.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                final AccountDBHelper accountDBHelper = new AccountDBHelper(getApplicationContext());
-//                accountDBHelper.dropTransaction();
-//            }
-//        });
-//        listview = findViewById(R.id.lv_transactions);
-//
-//        spn = findViewById(R.id.spinner_categories);
-//        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.choose_category,
-//                android.R.layout.simple_spinner_dropdown_item);
-//        spn.setAdapter(adapter);
-
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();

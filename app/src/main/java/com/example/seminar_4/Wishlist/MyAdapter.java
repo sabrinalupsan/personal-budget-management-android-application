@@ -44,15 +44,12 @@ public class MyAdapter extends BaseAdapter {
         this.layoutInflater = LayoutInflater.from(context);
 
         createCheckedHolder();
-
     }
 
     @Override
     public int getCount() {
         return wishList.size();
     }
-
-
 
     @Override
     public Object getItem(int position) {
@@ -77,10 +74,6 @@ public class MyAdapter extends BaseAdapter {
 
     }
 
-//    public boolean getChecked(){
-//        if(  )
-//    }
-
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         final WishViewHolder holder;
@@ -102,13 +95,10 @@ public class MyAdapter extends BaseAdapter {
         progressAnimator = ObjectAnimator.ofInt(holder.progressBar, "progress", 0,10);
         progressAnimator.setDuration(2000);
         progressAnimator.start();
-        //holder.progressBar.setProgress(5);
 
         Wish wish = wishList.get(getItemId(position));
         holder.name.setText(wish.getName());
         holder.atributes.setText(wish.getCategory());
-//        if( wish.getCategory()=="experience")
-        System.out.println("bbbbb"+images.get(0).toString());
         for (Image image : images) {
             if(wish.getCategory()==image.getCategory()){
                 holder.img.setImageBitmap(image.getImage());
@@ -116,20 +106,6 @@ public class MyAdapter extends BaseAdapter {
             }
         }
         holder.progressBar.setProgress(10);
-//        holder.img.setImageBitmap(this.images.get((int) getItemId(position)-1));
-//        else
-//            holder.img.setImageBitmap(this.images.get(1));
-
-//        holder.filtered.setChecked(checkedHolder[position]);
-//        holder.filtered.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//
-//                    checkedHolder[position] = isChecked;
-//            }
-//        });
-
-
         return convertView;
     }
 
@@ -139,13 +115,6 @@ public class MyAdapter extends BaseAdapter {
         checkedHolder = new boolean[getCount()];
     }
 
-//    public void downloadImage(View view) {
-//        Log.d(TAG, "----------downloadImage method------------");
-//        DownloadContent imageTask = new DownloadContent("http://pdm.ase.ro/images/tehnologii.png");
-//        Thread downloadThread = new Thread(imageTask);
-//        downloadThread.start();
-//
-//    }
     }
 
 

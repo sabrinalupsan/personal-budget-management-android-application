@@ -25,8 +25,7 @@ import android.widget.ToggleButton;
 
 import com.example.seminar_4.Cash.Cash;
 import com.example.seminar_4.Cash.DownloadAsync;
-import com.example.seminar_4.CashActivity;
-import com.example.seminar_4.R;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;

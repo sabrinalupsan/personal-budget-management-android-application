@@ -19,6 +19,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+<<<<<<< Updated upstream
+=======
+import com.example.seminar_4.CreditCards.AccountDBHelper;
+>>>>>>> Stashed changes
 import com.example.seminar_4.MainMenuActivity;
 import com.example.seminar_4.R;
 

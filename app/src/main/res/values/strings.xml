@@ -151,4 +151,5 @@
     <string name="examples">Examples</string>
     <string name="todo">TODO</string>
     <string name="choose_rating">Choose rating</string>
+    <string name="max_cash">Set the maximum amount of cash</string>
 </resources>

@@ -20,6 +20,12 @@
             app:title="@string/signature_title"
             app:useSimpleSummaryProvider="true" />
 
+        <SeekBarPreference
+            android:defaultValue="22"
+            android:title="@string/max_cash"
+            android:key="seekBar"
+            app:showSeekBarValue="true"
+            android:max="1000"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

@@ -28,7 +28,7 @@ public class CreditCards_2 extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        String param1 = extras.getString("param1");
+
         String param2 = extras.getString("param2");
         String param3 = extras.getString("param3");
         String param4 = extras.getString("param4");
@@ -36,7 +36,10 @@ public class CreditCards_2 extends AppCompatActivity {
         String param9 = extras.getString("param9");
 
 
+
+
         iban = param2;
+        Toast.makeText(this, iban, Toast.LENGTH_LONG).show();
         amount = (TextView)findViewById(R.id.tv_amountCorrect);
         amount.setText(param3);
 
@@ -60,7 +63,6 @@ public class CreditCards_2 extends AppCompatActivity {
     public void returnToMainActivity(View view)
     {
         Intent intent = new Intent();
-        intent.putExtra("param2", "Data coming from the second activity!");
         setResult(RESULT_OK, intent);
         finish();
     }
@@ -77,7 +79,7 @@ public class CreditCards_2 extends AppCompatActivity {
         accountDBHelper.insertSampleTransaction(creditEntry.getIban(), creditEntry.getAmount(), creditEntry.getType(),
                 creditEntry.getCategory(), creditEntry.getDate());
 
-        extras.putSerializable("p200", creditEntry);
+        extras.putString("paramIBAN", creditEntry.getIban());
         intent.putExtras(extras);
         startActivity(intent);
     }

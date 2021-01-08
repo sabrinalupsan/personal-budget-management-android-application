@@ -28,46 +28,59 @@
             android:textSize="30sp"
             android:textStyle="italic" />
 
-        <Spinner
-            android:id="@+id/spinner_categories"
+        <TextView
+            android:id="@+id/tv_transactions"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <ListView
-            android:id="@+id/lv_transactions"
-            android:layout_width="match_parent"
-            android:layout_height="282dp" />
+            android:scrollbars="vertical"
+            android:scrollbarSize="20dp"
+            android:layout_height="410dp"
+            android:layout_margin="10dp" />
 
         <Button
             android:id="@+id/btn_backToMain"
-            android:layout_width="match_parent"
+            android:layout_width="396dp"
             android:layout_height="wrap_content"
-
+            android:layout_margin="8dp"
+            android:background="@color/orange"
             android:onClick="returnToMainActivityFromList"
-            android:text="@string/back_to_the_initial_activity" />
+            android:text="@string/back_to_the_bank_details" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:weightSum="3"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button2"
-                android:layout_width="144dp"
+                android:id="@+id/btn_saveFile"
+                android:onClick="SaveFile"
+                android:layout_width="176dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="@string/save_all" />
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/orange"
+                android:text="@string/save_text_file" />
 
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="139dp"
-                android:layout_height="wrap_content"
-                android:text="@string/get_all" />
 
             <Button
                 android:id="@+id/button5"
-                android:layout_width="128dp"
+                android:layout_weight="1"
+                android:background="@color/orange"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
                 android:text="@string/delete_all" />
+
+            <Button
+                android:id="@+id/btn_dropTransaction"
+                android:layout_weight="1"
+                android:background="@color/orange"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="@string/drop_table" />
 
         </LinearLayout>
 

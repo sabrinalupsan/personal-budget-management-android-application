@@ -39,12 +39,40 @@ public class AccountDBHelper extends SQLiteOpenHelper {
         TransactionTable.onUpgrade(database, oldVersion, newVersion);
     }
 
+//    public void dropAccount()
+//    {
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        db.execSQL("DROP TABLE IF EXISTS " + AccountTable.TABLE_TODO);
+//    }
+//
+//    public void dropTransaction()
+//    {
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        db.execSQL("DROP TABLE IF EXISTS " + TransactionTable.TABLE_TODO);
+//    }
+
     public Cursor getDataCursorAccount() {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(AccountTable.TABLE_TODO, null, null, null, null, null, null, null);
         // Make sure that potential listeners are getting notified
         return cursor;
+    }
+
+    public Cursor getDataCursorTransaction(int id) {
+
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor mCursor = db.rawQuery(" SELECT " + TransactionTable.COLUMN_IBAN + "," + TransactionTable.COLUMN_AMOUNT + ","
+                        + TransactionTable.COLUMN_SUMTYPE + "," + TransactionTable.COLUMN_CATEGORY + ", " +
+                        TransactionTable.COLUMN_DATE + "," + AccountTable.COLUMN_LIMIT + ", " + AccountTable.COLUMN_BANK+ " FROM " +
+                        TransactionTable.TABLE_TODO + ","+ AccountTable.TABLE_TODO + " WHERE "+ TransactionTable.TABLE_TODO + "."+
+                        TransactionTable.COLUMN_ID + " = \"" + id + "\"AND "+ TransactionTable.TABLE_TODO + "."+
+                        TransactionTable.COLUMN_IBAN + "=" + AccountTable.TABLE_TODO + "." + AccountTable.COLUMN_IBAN,
+                        null,null);
+        if (mCursor != null)
+            mCursor.moveToFirst();
+
+        return mCursor;
     }
 
 
@@ -57,7 +85,6 @@ public class AccountDBHelper extends SQLiteOpenHelper {
             mCursor.moveToFirst();
 
         return mCursor.getString(mCursor.getColumnIndex("AmountLimit"));
-
     }
 
     public void insertSampleAccount(String iban, String bank, String limit) {

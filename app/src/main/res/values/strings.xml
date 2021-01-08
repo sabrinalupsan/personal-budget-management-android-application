@@ -65,13 +65,6 @@
     <string name="ok2">OK</string>
     <string name="back_to_the_initial_activity">Back to the initial activity</string>
     <color name="orange">#F7D358</color>
-    <string-array name="choose_category">
-        <item>All</item>
-        <item>Food</item>
-        <item>Clothing</item>
-        <item>Services</item>
-
-    </string-array>
 
     <string-array name="choose_bank">
         <item>ING</item>
@@ -91,7 +84,6 @@
     <string name="save2">Save</string>
     <string name="get_all">get all</string>
     <string name="save_all">Save all</string>
-    <string name="delete_all">Delete all</string>
     <string name="title_activity_edit_item">EditItem</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -148,4 +140,11 @@
     <string name="iban">IBAN</string>
     <string name="cancel">Cancel</string>
     <string name="amount_of_money_lei">Amount of money (lei)</string>
+    <string name="back_to_the_bank_details">Back to the Bank Details</string>
+    <string name="save_in_text_file">Save in text file</string>
+    <string name="save_csv">Save CSV</string>
+    <string name="delete_all">Delete all</string>
+    <string name="drop">Drop</string>
+    <string name="save_text_file">Save Text File</string>
+    <string name="drop_table">Drop table</string>
 </resources>

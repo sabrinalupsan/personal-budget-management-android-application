@@ -42,7 +42,7 @@ public class CreditEntry implements Serializable {
 
     @Override
     public String toString() {
-        return "IBAN: " + this.iban + ", Amount: " + this.amount + ", Type: " + this.type +
-                ", Category: " + this.category + ", Date: " + this.date;
+        return "IBAN: " + this.iban  + ", Type: " + this.type +
+                ", Category: " + this.category + ", Date: " + this.date + ", Amount: " + this.amount;
     }
 }

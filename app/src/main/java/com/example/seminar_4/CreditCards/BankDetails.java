@@ -23,8 +23,11 @@ import com.example.seminar_4.Cash.CashDBHelper;
 import com.example.seminar_4.MainMenuActivity;
 import com.example.seminar_4.R;
 
-public class BankDetails extends AppCompatActivity {
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 
+public class BankDetails extends AppCompatActivity {
+    private static final String TAG = BankDetails.class.getSimpleName();
     private Spinner spn;
     private Button btn_cancel;
     private Button btn_ok;
@@ -36,6 +39,15 @@ public class BankDetails extends AppCompatActivity {
         setContentView(R.layout.activity_bank_details);
 
         listView = findViewById(R.id.lv_banks);
+//        btn_drop = findViewById(R.id.btn_dropAccount);
+//
+//        btn_drop.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                final AccountDBHelper accountDBHelper = new AccountDBHelper(getApplicationContext());
+//                accountDBHelper.dropAccount();
+//            }
+//        });
 
         final AccountDBHelper accountDBHelper = new AccountDBHelper(this);
 
@@ -79,15 +91,14 @@ public class BankDetails extends AppCompatActivity {
                 EditText etLimit = findViewById(R.id.et_limit);
                 spn = findViewById(R.id.spn_bankName);
 
-                accountDBHelper.insertSampleAccount(etIBAN.getText().toString(), spn.getSelectedItem().toString(), etLimit.getText().toString());
-
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("paramIBAN", etIBAN.getText().toString());
                 bundle.putString("paramLimit", etLimit.getText().toString());
                 intent.putExtras(bundle);
 
-                startActivityForResult(intent, 1011);
+                accountDBHelper.insertSampleAccount(etIBAN.getText().toString(), spn.getSelectedItem().toString(), etLimit.getText().toString());
+                startActivity(intent);
             }
         });
 
@@ -107,9 +118,33 @@ public class BankDetails extends AppCompatActivity {
                 bundle.putString("paramIBAN", iban);
                 bundle.putString("paramLimit", limit);
                 intent.putExtras(bundle);
-                startActivityForResult(intent, 1012);
+                startActivity(intent);
             }
         });
     }
 
+    public String GetTextFromList()
+    {
+        String value = "";
+        //for(int i=0;i<listView.getCount();i++)
+            value = value + listView.getItemAtPosition(0).toString();
+
+        return value;
+    }
+
+    public void SaveFileCSV(View view){
+        writeToFile(GetTextFromList());
+    }
+
+    private void writeToFile(String data) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput("Account.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(data);
+            outputStreamWriter.close();
+        }
+        catch (IOException e) {
+            Log.e(TAG, "File write failed: " + e.toString());
+        }
+
+    }
 }

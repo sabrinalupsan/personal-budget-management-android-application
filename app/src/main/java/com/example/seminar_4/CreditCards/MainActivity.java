@@ -26,19 +26,29 @@ public class MainActivity extends AppCompatActivity {
     private String sIBAN, sLimit;
 
 
-//    @Override
-//    protected void onCreate(final Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main_credit_cards);
-//
-//    }
-//
+    @Override
+    protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main_credit_cards);
+
+        Intent intent = getIntent();
+
+        if(intent.getExtras() != null) {
+            Bundle extras = intent.getExtras();
+            sIBAN = extras.getString("paramIBAN");
+            if (extras.getString("paramLimit") != null) {
+                sLimit = extras.getString("paramLimit");
+            }
+        }
+
+    }
+
 //    @Override
 //    protected void onStart()
 //    {
 //        // TODO Auto-generated method stub
 //        super.onStart();
-//        Progress(findViewById(R.id.tv_seekBarValue));
+//       // Progress(findViewById(R.id.tv_seekBarValue));
 //    }
 //
 //
@@ -47,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 //    {
 //        // TODO Auto-generated method stub
 //        super.onResume();
-//        Progress(findViewById(R.id.tv_seekBarValue));
+//        //Progress(findViewById(R.id.tv_seekBarValue));
 //    }
 //
 //
@@ -131,17 +141,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 100)
-        {
-            if(data != null)
-            {
-                Bundle extras = data.getExtras();
-                String param2 = extras.getString("param2");
-                Toast.makeText(this, param2, Toast.LENGTH_LONG).show();
-
-            }
-        }
-        else
         if(requestCode == 200)
         {
             if(data != null)
@@ -150,15 +149,6 @@ public class MainActivity extends AppCompatActivity {
                 String param8 = extras.getString("param8");
                 tv = (TextView)findViewById(R.id.tv_DatePlace);
                 tv.setText(param8);
-            }
-        }
-        else if(requestCode == 1011 || requestCode == 1012) {
-            if (data != null) {
-                Intent intent = getIntent();
-                Bundle extras = intent.getExtras();
-
-                sIBAN = extras.getString("paramIBAN");
-                sLimit = extras.getString("paramLimit");
             }
         }
     }

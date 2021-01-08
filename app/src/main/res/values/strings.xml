@@ -148,4 +148,7 @@
     <string name="iban">IBAN</string>
     <string name="cancel">Cancel</string>
     <string name="amount_of_money_lei">Amount of money (lei)</string>
+    <string name="examples">Examples</string>
+    <string name="todo">TODO</string>
+    <string name="choose_rating">Choose rating</string>
 </resources>

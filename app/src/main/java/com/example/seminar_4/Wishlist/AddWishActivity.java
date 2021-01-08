@@ -34,6 +34,7 @@ public class AddWishActivity extends AppCompatActivity {
     private Intent intent;
     private RadioGroup rgCategory;
     private Button btnSeeMaps;
+    private Button btnCancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,12 @@ public class AddWishActivity extends AppCompatActivity {
                 startActivityForResult(mapsIntent, 2);
             }
         });
-
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private View.OnClickListener addWishClickEvent(){
@@ -107,6 +113,7 @@ public class AddWishActivity extends AppCompatActivity {
         btnAdd=findViewById(R.id.addBtn);
         rgCategory=findViewById(R.id.rgCategory);
         btnSeeMaps = findViewById(R.id.addMaps);
+        btnCancel = findViewById(R.id.cancelBtn);
     }
 
     private void populateSpnAlerts(){
@@ -120,7 +127,7 @@ public class AddWishActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 10) {
             String res = data.getStringExtra("wishname");
-            wishName.setText(res);
+            wishName.setText("Trip to "+res);
         }
 
     }

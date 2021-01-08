@@ -91,7 +91,6 @@ public class MainActivityCash extends AppCompatActivity {
 
         });
 
-
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

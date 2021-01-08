@@ -113,7 +113,7 @@
 
     </string-array>
     <string name="title_activity_maps">Map</string>
-    <string name="see_suggestions">See suggestions</string>
+    <string name="see_suggestions">See holiday suggestions</string>
     <string name="yes2">Yes</string>
     <string name="no2">No</string>
     <string name="show_chart">Show chart</string>
@@ -133,7 +133,7 @@
     <string name="ok">OK</string>
     <string name="cancel4">Cancel</string>
     <string name="change_settings">Change settings</string>
-    <string name="add">Add</string>
+    <string name="add">Add a wish</string>
     <string name="save">Save</string>
     <string name="second_fragment">Second fragment</string>
     <string name="back">Back</string>
@@ -152,4 +152,6 @@
     <string name="todo">TODO</string>
     <string name="choose_rating">Choose rating</string>
     <string name="max_cash">Set the maximum amount of cash</string>
+    <string name="cancelAddWish">Cancel</string>
+    <string name="btnCancelWishList">Cancel</string>
 </resources>
